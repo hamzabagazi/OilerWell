@@ -41,8 +41,9 @@ if (isset($_POST["export_excel"]))
                   .'<td>' .$row["time"].'</td>'
                   .'<td>' .$row["blood"].'</td>';
       }
-       $output.= '</table>';            
-       header("Content-Type: application/xls"); 
+       $output.= '</table>';     
+ 
+       header("Content-Type: application/vnd.ms-excel");       
        header("Content-Disposition: attachment; filename= Appointment.xls"); 
        echo $output; 
                   

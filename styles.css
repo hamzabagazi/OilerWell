@@ -1,0 +1,563 @@
+
+
+/*  **************************************  */ 
+			/*   CSS File   */ 
+/*  **************************************  */ 
+
+
+
+
+
+/* reset styles */
+html {
+   font-size: 16px;
+  
+}
+.zoom{
+	zoom: 100%
+}
+
+a, article, body, div, footer,figure,  fieldset, form, header, h1, h2,
+sitenavigation, span, input, label, legend, li, nav, p, ul,
+ img{
+   border: 0;
+   padding: 0;
+   margin: 0;
+}
+
+img {
+   max-width: 100%;
+   height: auto;
+   width: auto;
+   border-radius: 5px 
+}
+
+
+/* header section 
+header {
+   max-width: 400px;
+   margin: 0 auto;
+    width: auto;
+}
+*/
+
+h1 {
+	
+   height: auto;
+   width: auto;
+   text-align: center;
+   font-family: Bitter, "Times New Roman", Times, serif;
+   font-weight: 500;
+   background-color: #cccccc; 
+   font-size: 2.4em;
+   padding: 0.2em 0.4em 0em;
+   
+}
+
+/* ****************   site navigation bar ******************** */
+nav.sitenavigation {
+   color: white;
+   text-align: center;
+   background-color:  #cccccc;
+}
+
+
+
+
+/* ===============*/ 
+
+/*text before visit and hover */
+.wrapper{
+   display: inline-block;
+}
+a,a:visited,a:hover,a:active{
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+	position:relative;
+  transition:0.5s color ease;
+	text-decoration:none;
+	color:  #4d9900;
+	font-size:2.5em;
+	
+}
+
+a:hover{
+	color: white;
+	
+}
+a.before:before,a.after:after{
+  content: "";
+  transition:0.5s all ease;
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+  position:absolute;
+}
+a.before:before{
+  top:-0.25em;
+}
+a.after:after{
+  bottom:-0.25em;
+}
+/* line color top&bottom */ 
+
+a.before:before,a.after:after{
+  height:5px;
+  height:0.20rem;
+  width:0;
+  background:#4d9900;
+}
+a.first:after{
+  left:0;
+}
+a.second:after{
+  right:0;
+}
+a.third:after,a.sixth:before,a.sixth:after{
+  left:50%;
+  -webkit-transform:translateX(-50%);
+          transform:translateX(-50%);
+}
+a.fourth:before,a.fourth:after{
+  left:0;
+}
+a.fifth:before,a.fifth:after{
+  right:0;
+}
+a.seventh:before{
+  right:0;
+}
+a.seventh:after{
+  left:0;
+}
+a.eigth:before{
+  left:0;
+}
+a.eigth:after{
+  right:0;
+}
+a.before:hover:before,a.after:hover:after{
+  width:100%;
+}
+/*size of the text of square */
+.square{
+  box-sizing:border-box;
+  margin-left:1em;
+  position:relative;
+  font-size:1.5em;
+  overflow:hidden;
+  line-height: 1.4em;   
+}
+.square a{
+  position:static;
+  font-size:100%;
+  padding:0.2em 0.4em;
+}
+
+/* sides lines */ 
+.square:before,.square:after{
+  content: "";
+  box-sizing:border-box;
+  transition:0.25s all ease;
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+  position:absolute;
+  width:5px;
+  width:0.20rem;
+  height:0;
+  background:#4d9900;
+}
+.square:before{
+  left:0;
+  bottom:-0.2em;
+}
+.square.individual:before{
+  transition-delay:0.6s;
+}
+.square:after{
+  right:0;
+  top:-0.2em;
+}
+.square.individual:after{
+  transition-delay:0.2s;
+}
+.square a:before{
+  left:0;
+  transition:0.25s all ease;
+}
+.square a:after{
+  right:0;
+  transition:0.25s all ease;
+}
+.square.individual a:after{
+  transition:0.25s all ease 0.4s;
+}
+.square:hover:before,.square:hover:after{
+  height:calc(100% + 0.4em);
+}
+.square:hover a:before,.square:hover a:after{
+  width:100%;
+}
+
+/* main content */
+article {
+   margin: 0 auto;
+   padding: 1.4em;
+   background: #cccccc;
+   /*background: url("images/background_Book.jpg");*/
+}
+
+
+article h2{
+	 height: auto;
+   width: auto;
+	text-align: center;
+   font-family: Bitter, "Times New Roman", Times, serif;
+   font-weight: 500;
+   background-color: #cccccc; 
+   font-size: 2em;
+   padding:  0.4em;
+   border-radius: 5px;
+   margin: 1em;
+	
+}
+
+.container {
+   
+   max-width: 980px;
+   margin: 0 auto;
+   padding: 1em 3% 1em;
+   background-color: white;
+   overflow: auto;
+   border-radius: 5px
+} 
+/*
+.ScheduleContainer {
+	
+	width: 100%; 
+	margin: 0 auto;
+	background-color: white;
+    padding: 1em 3% 1em;
+	border-radius: 5px;
+	
+   max-width: 980px;
+   margin: 0 auto;
+	}
+	*/
+.labelP{
+	display: block;
+	margin-left:0.4em; 
+}
+
+
+.generalP{
+	padding: 0.6em 0.5em 1em;
+	font-size: 1.5em;
+	margin-left: 1.2em; 
+	margin-bottom: 0.3em;
+	text-align: left;
+}
+
+article figure.pic{
+	margin-top: 1em; 
+
+	
+}
+
+article figure {
+	max-width: 100%; 
+	margin-left: 0.5em; 
+	margin-top: 3em;
+    float: right; 	
+	
+}
+
+.formattingMainList{
+	float: left; 
+}
+
+.accent{
+	font-weight: bold; 
+}
+
+article li{
+	margin: 0.3em 0.1em 0.5em 5em;
+	font-size: 1.3em;
+	list-style-type: disc;
+}
+
+.noListStyle{
+	margin: 0.3em 0.1em 0.5em 5em;
+	font-size: 1.3em;
+	list-style-type:none;
+}
+
+.doubleSpace{
+	margin-top: 1em; 
+}
+
+form {
+	padding: 30px;
+}
+/* fieldset styles */
+fieldset {
+	margin: -0.2em 0 0.8em;
+}
+
+/* label styles */
+.formGeneral label {
+	
+	line-height: 1.6em;
+	padding-left: 3em;
+	
+}
+.requiredInfoChange label {
+	display: block;
+	position: relative;
+	margin: 0.5em 0.2em;
+	font-size: 1.5em;
+	
+}
+.requiredInfoSignUp label{
+	display: block;
+	position: relative;
+	margin: 0.5em 0.2em;
+	font-size: 1.5em;
+}
+.bloodQuestion label {
+    display: block;
+	position: relative;
+    margin: 0.5em 0.2em;
+	font-size: 1.4em;
+	padding-left: 3.8em;
+ }
+ 
+
+ 
+
+
+.bloodQuestionP{
+	font-size: 1.4em; 
+	margin-left: 3.5em; 
+	padding-top: 0.8em;
+}
+
+.requiredInfoSignUp input, .requiredInfoChange  input{
+	border: 1px solid #ccc; 
+	padding: 0.2em; 
+	font-size: 1em;
+	border-radius: 5px;
+	background-color:   #cccccc;
+	
+}
+/*
+.nextButton, .ScheduleNextButton{
+	border: 0;
+	text-align: right;
+	
+}*/
+#goButton{
+
+   border: none;
+   border-bottom: 1px solid #666;
+   border-right: 1px solid #777;
+  padding: 0.3em;
+   margin: 0 0 0 0.8em;
+   background-color:#4d9900;
+   font-size: 0.9em;
+   
+   color: ivory;
+   border-radius: 10px;
+	
+	
+	
+}
+.centerButton{
+	text-align: center; 
+}
+#nextButton, #backButton {
+	
+   border: none;
+   border-bottom: 1px solid #666;
+   border-right: 1px solid #777;
+   padding: 0.5em 2.8em;
+   margin: 0 auto;
+   background-color:#4d9900;
+   font-size: 1.3em;
+   color: ivory;
+   border-radius: 10px;
+   
+}
+
+
+
+
+/*
+label:before {
+	content: "* ";
+	color: red;
+}
+*/
+
+
+#firstinput, #lastinput, #emailinput , #phoneinput , #codeInput{
+	width:14em;
+}
+ 
+
+.map{
+    max-width: 100%;
+	margin: 0;
+	float: left;
+	padding: 0.5%;
+	background-color: black;
+	box-shadow: 0 10px 6px -6px #777;
+}
+
+
+
+/* feedback preview section */
+.summary-preview {
+   max-width: 700px;
+   padding: 10px;
+   margin: 50px auto;
+   border: 2px solid black;
+   font-size: 1.3em;
+   background-color: white;
+
+}
+.show {
+	display: block;
+}
+.summary-preview p {
+   margin-bottom: 1em;
+}
+.table-row {
+   display: table-row;
+}
+.table-row div:first-child {
+   font-weight: bold;
+}
+.table-cell {
+   padding: 0 0.2em;
+   display: table-cell;
+}
+
+
+
+
+
+
+
+/* Schedule Buttons */ 
+
+
+
+.four { width: 15%; max-width: 15%;}
+
+
+/* COLUMNS */
+
+.col {
+  display: block;
+  float:left;
+  margin: -2% 0 1% 1.6%;
+}
+
+.col:first-of-type { margin-left: 10%; }
+
+/* CLEARFIX */
+
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+}
+
+/* FORM */
+.dateForm .plan input{
+	display: none;
+}
+
+.dateForm label{
+	position: relative;
+	color: #fff;
+	background-color: #aaa;
+	font-size: 21px;
+	text-align: center;
+	height: 50px;
+	line-height: 48px;
+	display: block;
+	cursor: pointer;
+	border: 3px solid transparent;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 15px;
+	padding-bottom: 2em;
+	margin-bottom: 3%; 
+}
+
+
+.dateForm .plan input:checked + label{
+	border: 2px solid #333;
+	background-color: #4d9900;
+}
+
+.dateForm .plan input:checked + label:after{
+	content: "\2713";
+	width: 28px;
+	height: 28px;
+	line-height: 32px;
+	border-radius: 100%;
+	border: 2px solid #333;
+	background-color: #4d9900;
+	z-index: 999;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	display: inline-block;
+}
+
+/* Schedule Buttons */ 
+
+/* footer section */
+footer {
+   padding:0.8em ;
+   background-color: #4d9900;
+   color: ivory;
+   
+}
+
+.footerP{
+	text-align: center;
+	 font-size: 1.2em;
+	
+}
+
+/* User Table */ 
+
+ table {
+   border-collapse: collapse;
+   width: 100%;
+   color: #588c7e;
+   font-family: monospace;
+   font-size: 25px;
+   text-align: left;
+     } 
+  th {
+   background-color: #588c7e;
+   color: white;
+    }
+  tr:nth-child(even) {background-color: #f2f2f2};
+
+
+
+

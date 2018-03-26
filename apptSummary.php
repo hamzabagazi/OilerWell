@@ -7,6 +7,16 @@
     $drawblood = $_POST['drawblood'];
     $selectedDate = $_POST['selectedDate'];
     $selectedTime = $_POST['selectedTime'];
+    
+    function convert ($selectedDate, $selectedTime){
+        $compained= $selectedDate." ". $selectedTime; 
+        $dateTime=  date_create($compained);
+        
+        return $dateTime;
+    }
+    
+    $dateTime= convert ($selectedDate, $selectedTime);
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +125,7 @@
                      </div>	
                        <div class="table-cell">
                         <!-- <p class="summary-date" class="summary-time"></p> --> 
-                          <p > <?php  echo $selectedDate ?>  at <?php echo  $selectedTime ?> </p>  
+                          <p > <?php  echo date_format($dateTime, 'g:ia \o\n l jS F Y'); ?>   </p>  
                        </div>
                    </div>
 				  

@@ -1,16 +1,26 @@
 <?php
 
-$mysql = new mysqli('localhost', 'root', '');
+//Connection + database
+$user = "root"; 
+$password = ""; 
+$host = "localhost"; 
+$dbase = "oilerwellappointment"; 
 
+
+ // Create connection   
+$mysql = new mysqli($host, $user, $password);
+
+// Check connection
 if (! $mysql){
       
     die ('Cloud not connect:' . mysqli_error());
     
 }
 
-if (!mysqli_select_db($mysql, 'oilerwellappointment')){
+if (!mysqli_select_db($mysql, $dbase)){
     echo 'Database Not Selected';
 }
+
 
 
 $status='display:none;';

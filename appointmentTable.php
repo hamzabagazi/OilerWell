@@ -1,30 +1,46 @@
  <?php
-$mysql = mysqli_connect('localhost', 'root', '');
+ 
+ //Connection + database
+$user = "root"; 
+$password = ""; 
+$host = "localhost"; 
+$dbase = "oilerwellappointment"; 
 
- // Check connection
+
+ // Create connection   
+$mysql = mysqli_connect($host, $user, $password);
+
+// Check connection
 if (! $mysql){
       
     die ('Cloud not connect:' . mysqli_error());
     
 }
 
-if (!mysqli_select_db($mysql, 'oilerwellappointment')){
+if (!mysqli_select_db($mysql, $dbase)){
     echo 'Database Not Selected';
 }
+   
+function convert ($tableDateTime){
+        
+        $dateTime=  date_create($tableDateTime);
+        $formatted =  date_format($dateTime, 'm/d/Y H:i');
+        
+        return $formatted;
+    }
+    
+  
+    
+
+
+
  ?>
 
 <!DOCTYPE html>
 <html lang="en">
  <head>
-      <title>OilerWell</title>
-      <!-- 
-         Lakeland Reeds Bed & Breakfast main web page
-         Filename: index.html
-
-         Author:   
-         Date:     
-         
-      -->
+      <title>Appointment Table</title>
+    
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
       <script src="modernizr.custom.40753.js"></script>
@@ -59,14 +75,14 @@ if (!mysqli_select_db($mysql, 'oilerwellappointment')){
 				     <a class="tenth before after" href="guidelines.html"> Guidelines </a>
 				</span>
 			  </div>
-              <div class="wrapper">
+                <div class="wrapper">
 				<span class="square">
-			      <a class="tenth before after" href="ScheduleAppt.html"> Schedule Appointment </a>
+			      <a class="tenth before after" href="ScheduleAppt.php"> Schedule Appointment </a>
 				</span>
 			  </div>
                <div class="wrapper">
 				<span class="square">
-			       <a class="tenth before after" href="changeAppt.html"> View/Change Appointment </a>
+			       <a class="tenth before after" href="changeAppt.php"> View/Change Appointment </a>
 				</span>
 			  </div>
                <div class="wrapper">
@@ -81,14 +97,13 @@ if (!mysqli_select_db($mysql, 'oilerwellappointment')){
   <article>
         <div class="container">
 		  <h2> Appointments</h2>  
-	       <table id ="result2" class ="table table-bordered" >
+	       <table id ="Appointments" class ="table table-bordered" >
                    <thead>
  <tr>
   <th>Id</th> 
   <th>First</th> 
   <th>Last</th> 
   <th>Date</th>
-  <th>Time</th> 
   <th>Blood</th> 
  </tr>
              </thead>
@@ -97,19 +112,19 @@ if (!mysqli_select_db($mysql, 'oilerwellappointment')){
 
    $row_counter = 1; 
   
-  $sql = "SELECT  firstName, lastName, date, time, blood FROM users";
+  $sql = "SELECT  firstName, lastName, dateTime, blood FROM users ORDER BY dateTime  ASC";
   $result = mysqli_query($mysql, $sql);
   
   if ($result->num_rows > 0) {
    // output data of each row
    while($row = $result->fetch_assoc()) {
+         $converted = convert ($row["dateTime"]);
             echo "<tr>"
        . "<td>" . $row_counter. "</td>"
        
        . "<td>" . $row["firstName"] . "</td>"
        . "<td>" . $row["lastName"]. "</td>"
-       . "<td>" . $row["date"]. "</td>"
-       . "<td>" . $row["time"]. "</td>"
+       . "<td>" .  $converted. "</td>"
        . "<td>" . $row["blood"]. "</td>"
               . "</tr>";
             $row_counter++; 
@@ -129,7 +144,7 @@ $mysql->close();
       <script src="gisttech/js/jquery-3.1.1.min.js" type="text/javascript"></script>
       <script src="gisttech/js/tableexport.min.js" type="text/javascript"></script>
       <script>
-      $('#result2').tableExport();
+      $('#Appointments').tableExport();
       </script>
     </article>
 	<footer>

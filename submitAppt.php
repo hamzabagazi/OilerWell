@@ -1,9 +1,27 @@
 <?php 
+//Connection + database
+$user = "root"; 
+$password = ""; 
+$host = "localhost"; 
+$dbase = "oilerwellappointment"; 
 
- 
+
+ // Create connection   
+$mysql = new mysqli($host, $user, $password);
+
+// Check connection
+if (! $mysql){
+      
+    die ('Cloud not connect:' . mysqli_error());
+    
+}
+
+if (!mysqli_select_db($mysql, $dbase)){
+    echo 'Database Not Selected';
+}
 
 
-use PHPMailer\PHPMailer\PHPMailer;
+/*use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
@@ -50,28 +68,18 @@ try {
 } catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 }
+*/
 
-
- // Create connection   
-$mysql = new mysqli('localhost', 'root', '');
-
-// Check connection
-if (! $mysql){
-      
-    die ('Cloud not connect:' . mysqli_error());
-    
-}
-
-if (!mysqli_select_db($mysql, 'oilerwellappointment')){
-    echo 'Database Not Selected';
-}
+ 
     $firstName = trim($_POST['firstName']);   
     $lastName = trim($_POST['lastName']);
     $email = trim($_POST['email']);
     $phone = trim($_POST['phone']);
     $drawblood = trim($_POST['drawblood']);
-    $selectedDate = trim($_POST['selectedDate']);
-    $selectedTime = trim($_POST['selectedTime']);
+    $selectedDate = $_POST['selectedDate'];
+    $selectedTime = $_POST['selectedTime'];
+    $dateTime = $selectedDate." ". $selectedTime;
+   // $selectedTime = trim($_POST['selectedTime']);
     $uniqueCode = TRUE; 
     $format; 
     
@@ -100,7 +108,7 @@ if ($result->num_rows > 0){
     $id = trim($row["id"]);
      }
      
-   $sql = "UPDATE users SET date='$selectedDate', time='$selectedTime' WHERE id='$id'";
+   $sql = "UPDATE users SET dateTime='$dateTime' WHERE id='$id'";
    
     if (mysqli_query($mysql, $sql)){
          header("refresh:1; url=main.html");
@@ -121,17 +129,17 @@ if ($result->num_rows > 0){
         echo '</script>';
     }
 }
-else if ($result->num_rows == 0){
-    
-    $sql = "INSERT INTO users (firstName, lastName, email, phone, date, time, blood, code)"
-            . "VALUES('$firstName', '$lastName', '$email', '$phone',  '$selectedDate', '$selectedTime', '$drawblood', '$code')"; 
+elseif ($result->num_rows == 0){
+  
+    $sql = "INSERT INTO users (firstName, lastName, email, phone, dateTime, blood, code)"
+            . "VALUES('$firstName', '$lastName', '$email', '$phone',  '$dateTime', '$drawblood', '$code')"; 
 
         if (mysqli_query($mysql, $sql)){
        
            // header("refresh:10; url=main.html");
      
 
-       
+     
         
           echo '<script language="javascript">';
         echo 'alert("Thank you, your appointment has been scheduled!")';

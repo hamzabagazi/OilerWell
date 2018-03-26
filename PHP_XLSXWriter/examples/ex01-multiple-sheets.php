@@ -1,26 +1,7 @@
 <?php
-//set_include_path( get_include_path().PATH_SEPARATOR."..");
-include_once("PHP_XLSXWriter/xlsxwriter.class.php");
-$mysql = new mysqli('localhost', 'root', '');
+set_include_path( get_include_path().PATH_SEPARATOR."..");
+include_once("xlsxwriter.class.php");
 
-if (! $mysql){
-      
-    die ('Cloud not connect:' . mysqli_error());
-    
-}
-
-if (!mysqli_select_db($mysql, 'oilerwellappointment')){
-    echo 'Database Not Selected';
-}
-
-$output = ''; 
-
-if (isset($_POST["export_excel"]))
-{
-      $sql = "SELECT id, firstName FROM users";
-  $result = mysqli_query($mysql, $sql);
-  
-  
 $header = array(
     'year'=>'string',
     'month'=>'string',
@@ -43,11 +24,11 @@ foreach($data1 as $row)
 	$writer->writeSheetRow('Sheet1', $row);
 foreach($data2 as $row)
 	$writer->writeSheetRow('Sheet2', $row);
+
 $writer->writeToFile('xlsx-sheets.xlsx');
 //$writer->writeToStdOut();
 //echo $writer->writeToString();
+
 exit(0);
 
-}
- 
-?>
+

@@ -452,6 +452,7 @@ label:before {
 
 
 
+
 .four { width: 15%; max-width: 15%;}
 
 
@@ -459,7 +460,7 @@ label:before {
 
 .col {
   display: block;
-  float: center;
+  float:left;
   margin: -2% 0 1% 1.6%;
 }
 
@@ -550,12 +551,12 @@ footer {
    color: #588c7e;
    font-family: monospace;
    font-size: 25px;
-  /* text-align: left; */
+  text-align: left; 
      } 
   th {
    background-color: #588c7e;
    color: white;
-     text-align: center;
+    /* text-align: center;*/
     }
   tr:nth-child(even) {background-color: #f2f2f2};
 

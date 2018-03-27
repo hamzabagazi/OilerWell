@@ -89,9 +89,9 @@ try {
     //Attachments
   //  $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-//$message .= '<html><body>';
-$message .= '<img src="images/OilerWell_Logo_resized.png" alt="OilerWell Logo" />';
-$message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+$message .= "<html><body>";
+$message .= "<img src="//images/OilerWell_Logo_resized.png" alt="OilerWell Logo" width="859" height="267">";
+$message .= "<table rules="all" style="border-color: #666;" cellpadding="10">";
 $message .= "<tr style='background: #eee;'><td><strong>Name:</strong> </td><td>" . $firstName . " ". $lastName . "</td></tr>";
 $message .= "<tr><td><strong>Email:</strong> </td><td>" . $email . "</td></tr>";
 $message .= "<tr><td><strong>Phone:</strong> </td><td>" . $phone . "</td></tr>";

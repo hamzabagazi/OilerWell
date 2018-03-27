@@ -51,14 +51,7 @@ function  checkDatabased (){
 <html lang="en">
  <head>
        <title>OilerWell</title>
-      <!-- 
-         Lakeland Reeds Bed & Breakfast main web page
-         Filename: index.html
-
-         Author:   
-         Date:     
-         
-      -->
+     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
      <!-- <script src="modernizr.custom.40753.js"></script> -->

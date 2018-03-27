@@ -21,7 +21,7 @@ if (!mysqli_select_db($mysql, $dbase)){
 }
 
 
-/*use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
@@ -32,7 +32,7 @@ try {
     //Server settings
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
     $mail->isSMTP();    
-    $mail->SMTPOptions = array(
+   $mail->SMTPOptions = array(
     'ssl' => array(
         'verify_peer' => false,
         'verify_peer_name' => false,
@@ -40,14 +40,14 @@ try {
     )
 );// Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';   // Specify main and backup SMTP servers
-    $mail->SMTPAuth = false;                               // Enable SMTP authentication
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'oilerwell@gmail.com';                 // SMTP username
     $mail->Password = 'Oiler123';                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
     $mail->SMTPSecure = false;
     //Recipients
-    $mail->setFrom('hamzabagazi@gmail.com');
+    $mail->setFrom('oilerwell@gmail.com');
     $mail->addAddress('hamzabagazi@gmail.com');     // Add a recipient
    
   //  $mail->addReplyTo('info@example.com', 'Information');
@@ -68,7 +68,7 @@ try {
 } catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 }
-*/
+
 
  
     $firstName = trim($_POST['firstName']);   
@@ -78,7 +78,7 @@ try {
     $drawblood = trim($_POST['drawblood']);
     $selectedDate = $_POST['selectedDate'];
     $selectedTime = $_POST['selectedTime'];
-    $dateTime = $selectedDate." ". $selectedTime;
+    $dateTime = trim($selectedDate." ". $selectedTime);
    // $selectedTime = trim($_POST['selectedTime']);
     $uniqueCode = TRUE; 
     $format; 
@@ -111,7 +111,7 @@ if ($result->num_rows > 0){
    $sql = "UPDATE users SET dateTime='$dateTime' WHERE id='$id'";
    
     if (mysqli_query($mysql, $sql)){
-         header("refresh:1; url=main.html");
+       //  header("refresh:1; url=main.html");
            
        echo '<script language="javascript">';
         echo 'alert("Your appointment has been successfully rescheduled, Thank you.")';
@@ -123,7 +123,7 @@ if ($result->num_rows > 0){
         
     }
      else {
-        header("location: ScheduleAppt.php");
+       // header("location: ScheduleAppt.php");
              echo '<script language="javascript">';
         echo 'alert("Unable to reschedule your appointment, Please try again. ")';
         echo '</script>';

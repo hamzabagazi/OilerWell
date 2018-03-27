@@ -24,9 +24,8 @@ if (!mysqli_select_db($mysql, $dbase)){
 function convert ($tableDateTime){
         
         $dateTime=  date_create($tableDateTime);
-        $formatted =  date_format($dateTime, 'm/d/Y H:i');
         
-        return $formatted;
+        return $dateTime;
     }
     
   
@@ -118,13 +117,12 @@ function convert ($tableDateTime){
   if ($result->num_rows > 0) {
    // output data of each row
    while($row = $result->fetch_assoc()) {
-         $converted = convert ($row["dateTime"]);
             echo "<tr>"
        . "<td>" . $row_counter. "</td>"
        
        . "<td>" . $row["firstName"] . "</td>"
        . "<td>" . $row["lastName"]. "</td>"
-       . "<td>" .  $converted. "</td>"
+       . "<td>" .  date_format(convert ($row["dateTime"]), 'm/d/Y H:i'). "</td>"
        . "<td>" . $row["blood"]. "</td>"
               . "</tr>";
             $row_counter++; 

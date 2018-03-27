@@ -27,7 +27,40 @@ use PHPMailer\PHPMailer\Exception;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+
+
+
+ 
+    $firstName = trim($_POST['firstName']);   
+    $lastName = trim($_POST['lastName']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $drawblood = trim($_POST['drawblood']);
+    $selectedDate = $_POST['selectedDate'];
+    $selectedTime = $_POST['selectedTime'];
+    $dateTime = trim($selectedDate." ". $selectedTime);
+   // $selectedTime = trim($_POST['selectedTime']);
+    $uniqueCode = TRUE; 
+    $format; 
+    
+    
+   
+    
+    // Creat a random code and make sure that there's no duplicate code number
+   while ($uniqueCode){
+        
+       $code= rand(10000,99999); 
+       $query = "SELECT * FROM users WHERE code = '$code'"; 
+    $result = mysqli_query($mysql, $query);
+      if(mysqli_num_rows($result) == 0) {
+        $uniqueCode = FALSE; 
+      }
+        //else {
+        //    echo "inside the loop";
+        //}
+      
+    }
+ $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
     //Server settings
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
@@ -56,48 +89,31 @@ try {
     //Attachments
   //  $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
+$message .= "<html><body>";
+$message .= "<img src="//images/OilerWell_Logo_resized.png" alt="OilerWell Logo" width="859" height="267">";
+$message .= "<table rules="all" style="border-color: #666;" cellpadding="10">";
+$message .= "<tr style='background: #eee;'><td><strong>Name:</strong> </td><td>" . $firstName . " ". $lastName . "</td></tr>";
+$message .= "<tr><td><strong>Email:</strong> </td><td>" . $email . "</td></tr>";
+$message .= "<tr><td><strong>Phone:</strong> </td><td>" . $phone . "</td></tr>";
+$message .= "<tr><td><strong>Are you willing to have a PA student draw your blood?</strong> </td><td>" . $drawblood . "</td></tr>";
+$message .= "<tr><td><strong>Appointment Time:</strong> </td><td>" . $dateTime . "</td></tr>";
+$message .= "<tr><td><strong>Confirmation code:</strong> </td><td>" . $code . "</td></tr>";
+$message .= "</table>";
+$message .= "<P><b>*Note:</b> You need to use the confirmation code to View/Change the appointment.</p>";   
+//$message .= "</body></html>";
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Body    = $message;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
+  
 
     $mail->send();
     echo 'Message has been sent';
 } catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 }
-
-
- 
-    $firstName = trim($_POST['firstName']);   
-    $lastName = trim($_POST['lastName']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-    $drawblood = trim($_POST['drawblood']);
-    $selectedDate = $_POST['selectedDate'];
-    $selectedTime = $_POST['selectedTime'];
-    $dateTime = trim($selectedDate." ". $selectedTime);
-   // $selectedTime = trim($_POST['selectedTime']);
-    $uniqueCode = TRUE; 
-    $format; 
-    
-    // Creat a random code and make sure that there's no duplicate code number
-   while ($uniqueCode){
-        
-       $code= rand(10000,99999); 
-       $query = "SELECT * FROM users WHERE code = '$code'"; 
-    $result = mysqli_query($mysql, $query);
-      if(mysqli_num_rows($result) == 0) {
-        $uniqueCode = FALSE; 
-      }
-        //else {
-        //    echo "inside the loop";
-        //}
-      
-    }
-
    
     $sql = "SELECT * FROM `users` WHERE firstName = '$firstName' AND email = '$email'";
     

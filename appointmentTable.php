@@ -122,7 +122,7 @@ function convert ($tableDateTime){
        
        . "<td>" . $row["firstName"] . "</td>"
        . "<td>" . $row["lastName"]. "</td>"
-       . "<td>" .  date_format(convert ($row["dateTime"]), 'm/d/Y H:i'). "</td>"
+       . "<td>" .  date_format(convert ($row["dateTime"]), 'g:ia \o\n l jS F Y'). "</td>"
        . "<td>" . $row["blood"]. "</td>"
               . "</tr>";
             $row_counter++; 

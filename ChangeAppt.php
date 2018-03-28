@@ -28,8 +28,7 @@ $firstName = "first";
 $lastName = "last";
 $email = "email";
 $phone = "5";
-$date = "date";
-$time = "time";
+$dateTime="dateTime";
 $blood = "bloodAns";
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -49,12 +48,11 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
          $lastName = trim($row["lastName"]);
          $email = trim($row["email"]);
          $phone = trim($row["phone"]);
-         $date = trim($row["date"]);
-         $time = trim($row["time"]);
+         $dateTime = trim($row["dateTime"]);
          $blood = trim($row["blood"]);
          $code = trim($row["code"]);
          $status = 'none';
-        echo $id, $firstName , $lastName;  
+        
          
      }
      
@@ -73,6 +71,13 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 // if first display, or error, the html below will show.
 // on error, text boxes will have previously entered values.
 }
+
+ function convert ($dateTime){
+        
+        $fomattedDateTime=  date_create($dateTime);
+        
+        return $fomattedDateTime;
+    }
 ?>
 
 
@@ -194,7 +199,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
                      </div>	
                        <div class="table-cell">
                         <!-- <p class="summary-date" class="summary-time"></p> --> 
-                          <p > <?php  echo $date ?>  at <?php echo  $time ?> </p>  
+                          <p > <?php  echo date_format(convert($dateTime), 'g:ia \o\n l jS F Y'); ?>  </p>  
                        </div>
                    </div>
 				  
@@ -209,8 +214,8 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
                        <input type="hidden" name="phone" value=" <?php echo $phone;?>">
 			
                        <input type="hidden" name="drawblood" value=" <?php echo $blood;?>">
-                       <input type="hidden" name="selectedDate" value=" <?php echo $date;?>">
-                       <input type="hidden" name="selectedTime" value=" <?php echo $time;?>">		
+                       <input type="hidden" name="dateTime" value=" <?php echo $dateTime;?>">
+                       		
 				
 				 <fieldset class="nextButton">
                    <input type="submit" id="nextButton" value="Change" style="float: right; <?php echo  $status; ?>" >

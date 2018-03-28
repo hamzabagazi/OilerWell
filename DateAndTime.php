@@ -130,7 +130,7 @@ function  checkDatabased (){
 				
 				<input type="radio" name="selectedTime" id="1" value="6:30:00" checked><label class="free-label four col" for="1">6:30AM</label>
 				<input type="radio" name="selectedTime" id="2" value="6:40:00" ><label class="basic-label four col" for="2">6:40AM</label>
-				<input type="radio" name="selectedTime" id="3" value="6:50A:00"><label class="premium-label four col" for="3">6:50AM</label>
+				<input type="radio" name="selectedTime" id="3" value="6:50:00"><label class="premium-label four col" for="3">6:50AM</label>
 				<input type="radio" name="selectedTime" id="4" value="7:00:00" ><label class="b-label four col" for="4">7:00AM</label>
 				<input type="radio" name="selectedTime" id="5" value="7:10:00"><label class="p-label four col" for="5">7:10AM</label>
 				
@@ -166,7 +166,7 @@ function  checkDatabased (){
 			</section>
 			
 			<section class="plan cf">
-			<input type="radio" name="selectedTime" id="21" value="9:50AM"><label class="p-label four col" for="21">9:50AM</label>
+			<input type="radio" name="selectedTime" id="21" value="9:50:00"><label class="p-label four col" for="21">9:50AM</label>
 				<input type="radio" name="selectedTime" id="22" value="10:00:00"><label class="premium-label four col" for="22">10:00AM</label>
 				<input type="radio" name="selectedTime" id="23" value="10:10:00"><label class="b-label four col" for="23">10:10AM</label>
 				<input type="radio" name="selectedTime" id="24" value="10:20:00"><label class="p-label four col" for="24">10:20AM</label>

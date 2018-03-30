@@ -21,14 +21,7 @@ if (!mysqli_select_db($mysql, $dbase)){
     echo 'Database Not Selected';
 }
    
-function convert ($tableDateTime){
-        
-        $dateTime=  date_create($tableDateTime);
-        
-        return $dateTime;
-    }
-    
-  
+
     
 
 
@@ -95,55 +88,26 @@ function convert ($tableDateTime){
    
   <article>
         <div class="container">
-		  <h2> Appointments</h2>  
-	       <table id ="Appointments" class ="table table-bordered" >
-                   <thead>
- <tr>
-  <th>Id</th> 
-  <th>First</th> 
-  <th>Last</th> 
-  <th>Date</th>
-  <th>Blood</th> 
- </tr>
-             </thead>
-             <tbody>
- <?php
-
-   $row_counter = 1; 
-  
-  $sql = "SELECT  firstName, lastName, dateTime, blood FROM users ORDER BY dateTime  ASC";
-  $result = mysqli_query($mysql, $sql);
-  
-  if ($result->num_rows > 0) {
-   // output data of each row
-   while($row = $result->fetch_assoc()) {
-            echo "<tr>"
-       . "<td>" . $row_counter. "</td>"
-       
-       . "<td>" . $row["firstName"] . "</td>"
-       . "<td>" . $row["lastName"]. "</td>"
-       . "<td>" .  date_format(convert ($row["dateTime"]), ' l F jS Y \a\t g:ia '). "</td>"
-       . "<td>" . $row["blood"]. "</td>"
-              . "</tr>";
-            $row_counter++; 
-}
-echo "</table>";
-} else { echo "0 results"; }
-$mysql->close();
-?>
-             </tbody>
-</table>
-	<!--<form action="excel.php" method="post" class ="centerButton"> 
-            <input type="submit" id="nextButton" name="export_excel" class="btn btn-succes" value="Export to Excel"  />  
-      </form> 	 -->
+		  <h2> Admin</h2>  
+	       <form  action="ChangeAppt.php" method="post">
+		     <fieldset class ="requiredInfoChange">
+				
+				<label for="emailinput">
+					
+					<input type="email" name="email" id="emailinput"
+					placeholder="UserName" required >
+				</label>
+				<label for="confirmationCodeinput">
+					
+                                        <input type="password" name="code" id="codeInput" placeholder="Password">
+					    <input type="submit" id="goButton" value="Login">
+				</label>
+				 
+				</fieldset>
+			  </form>
+	
   </div> 
-      <script src="gisttech/js/bootstrap.min_1.js" type="text/javascript"></script>
-      <script src="gisttech/js/FileSaver.min.js" type="text/javascript"></script>
-      <script src="gisttech/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-      <script src="gisttech/js/tableexport.min.js" type="text/javascript"></script>
-      <script>
-      $('#Appointments').tableExport();
-      </script>
+     
     </article>
 	<footer>
        <p class="footerP"> 120 West Foulke Ave, Findlay, OH 45840 | (419) 434-4550 | cosiano@findlay.edu</p>
@@ -153,3 +117,5 @@ $mysql->close();
       
 	</body>
    </html>
+   
+   

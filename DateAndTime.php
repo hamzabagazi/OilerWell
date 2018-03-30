@@ -1,54 +1,50 @@
 <?php 
 
- session_start();
-  if (!isset($_SESSION["count"])) {
-    $_SESSION["count"] = 0;
-}  
+$user = "root"; 
+$password = ""; 
+$host = "localhost"; 
+$dbase = "oilerwellappointment"; 
 
-if ($_SESSION["count"] == 24){
-    $_SESSION["count"] = 0; 
-}
-$mysql = new mysqli('localhost', 'root', '');
 
+ // Create connection   
+$mysql = new mysqli($host, $user, $password);
+
+// Check connection
 if (! $mysql){
       
     die ('Cloud not connect:' . mysqli_error());
     
 }
 
-if (!mysqli_select_db($mysql, 'oilerwellappointment')){
+if (!mysqli_select_db($mysql, $dbase)){
     echo 'Database Not Selected';
 }
 
+function duplicate(){
+    $full=array(); 
 
-
-function  checkDatabased (){
-    $count = $_SESSION["count"]; 
-    
-  $dates = array("6:30", "6:40", "6:50", "7:00", "7:10", "7:20", "7:30", "7:40", 
-"7:50", "8:00", "8:10", "8:20", "8:30", "8:40", "8:50", "9:00", "9:10", "9:20"
-        , "9:30", "9:40", "9:50", "10:00", "10:10", "10:20", "10:30"); 
-
- $mon630 = "SELECT count(*) FROM `users` WHERE date LIKE '%monday%' AND time LIKE '%$dates[$count]%'";
- //$mysql = new mysqli('localhost', 'root', '');
- //if (!mysqli_select_db($mysql, 'oilerwellappointment')){
- //   echo 'Database Not Selected';
-//}
-      $result = mysqli_query($GLOBALS['mysql'], $mon630);
-    $duplicate = $result->fetch_row();
-    
-    // increment(); 
-  
-  
- echo $duplicate[0];
+ $duplicates = "SELECT dateTime, count(*) counter from users group by dateTime having counter > 3";
  
-}
+      $result = mysqli_query($GLOBALS['mysql'], $duplicates);
+     // $duplicate = $result->fetch_row();
+       if ($result->num_rows > 0) {
+     while($row = $result->fetch_assoc()) {
+          
+         $full[]= trim($row["dateTime"]);
+         
+         
+     }
+     
+     echo json_encode($full);
 
+}
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+    <meta charset="UTF-8">
  <head>
        <title>OilerWell</title>
      
@@ -59,7 +55,7 @@ function  checkDatabased (){
 	   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="styles.css">
 	  <link rel="shortcut icon" href="images/oilerwell_logo_icon.ico">
-        <!--  <script src="js/script.js" type="text/javascript"></script> -->
+        
    </head>
    
    <body>
@@ -115,64 +111,49 @@ function  checkDatabased (){
 			 <p class="generalP"> Please Select Date:  </p> 
 			 <section class="plan cf">
 				
-                             <input type="radio" name="selectedDate" id="free" value="2018-11-05" checked onclick= "mondayFunction()"><label class="free-label four col" for="free">Mon 11/5</label>
-				<input type="radio" name="selectedDate" id="basic" value="2018-11-06"><label class="basic-label four col" for="basic">Tue 11/6</label>
-				<input type="radio" name="selectedDate" id="premium" value="2018-11-07"><label class="premium-label four col" for="premium">Wed 11/7</label>
-				<input type="radio" name="selectedDate" id="b" value="2018-11-08" ><label class="b-label four col" for="b">Thu 11/8</label>
-				<input type="radio" name="selectedDate" id="p" value="2018-11-09"><label class="p-label four col" for="p">Fri 11/9</label>
+                             <input type="radio" name="selectedDate" id="free" value="2018-11-05"  onclick= "disableButtons('11-05')"><label class="free-label four col" for="free">Mon 11/5</label>
+				<input type="radio" name="selectedDate" id="basic" value="2018-11-06" onclick= "disableButtons('11-06')"><label class="label four col" for="basic">Tue 11/6</label>
+				<input type="radio" name="selectedDate" id="premium" value="2018-11-07" onclick= "disableButtons('11-07')"><label class="label four col" for="premium">Wed 11/7</label>
+				<input type="radio" name="selectedDate" id="b" value="2018-11-08" onclick= "disableButtons('11-08')"><label class="label four col" for="b">Thu 11/8</label>
+				<input type="radio" name="selectedDate" id="p" value="2018-11-09" onclick= "disableButtons('11-09')"><label class="label four col" for="p">Fri 11/9</label>
 			</section>
   
              
 			
 			<p class="generalP"> Please Select Time:  </p>
 			
-			<section class="plan cf">
+                        <?php 
+                         $counter = 1;
+                                $hour = 6;
+                                $minute = 30;
+                          for ($j =0; $j<5; $j++){
+                              
+                             
+			echo '<section class="plan cf">';
+                            
 				
-				<input type="radio" name="selectedTime" id="1" value="6:30:00" checked><label class="free-label four col" for="1">6:30AM</label>
-				<input type="radio" name="selectedTime" id="2" value="6:40:00" ><label class="basic-label four col" for="2">6:40AM</label>
-				<input type="radio" name="selectedTime" id="3" value="6:50:00"><label class="premium-label four col" for="3">6:50AM</label>
-				<input type="radio" name="selectedTime" id="4" value="7:00:00" ><label class="b-label four col" for="4">7:00AM</label>
-				<input type="radio" name="selectedTime" id="5" value="7:10:00"><label class="p-label four col" for="5">7:10AM</label>
-				
-			</section>
-			<section class="plan cf">
-				
-				<input type="radio" name="selectedTime" id="6" value="7:20:00"><label class="free-label four col" for="6">7:20AM</label>
-				<input type="radio" name="selectedTime" id="7" value="7:30:00"><label class="basic-label four col" for="7">7:30AM</label>
-				<input type="radio" name="selectedTime" id="8" value="7:40:00"><label class="premium-label four col" for="8">7:40AM</label>
-				<input type="radio" name="selectedTime" id="9" value="7:50:00"><label class="b-label four col" for="9">7:50AM</label>
-				<input type="radio" name="selectedTime" id="10" value="8:00:00"><label class="p-label four col" for="10">8:00AM</label>
-				
-			</section>
-			
-			<section class="plan cf">
-				
-				<input type="radio" name="selectedTime" id="11" value="8:10:00"><label class="free-label four col" for="11">8:10AM</label>
-				<input type="radio" name="selectedTime" id="12" value="8:20:00"><label class="basic-label four col" for="12">8:20AM</label>
-				<input type="radio" name="selectedTime" id="13" value="8:30:00"><label class="premium-label four col" for="13">8:30AM</label>
-				<input type="radio" name="selectedTime" id="14" value="8:40:00"><label class="b-label four col" for="14">8:40AM</label>
-				<input type="radio" name="selectedTime" id="15" value="8:50:00"><label class="p-label four col" for="15">8:50AM</label>
-				
-			</section>
-			
-			<section class="plan cf">
-				
-				<input type="radio" name="selectedTime" id="16" value="9:00:00"><label class="premium-label four col" for="16">9:00AM</label>
-				<input type="radio" name="selectedTime" id="17" value="9:10:00"<><label class="b-label four col" for="17">9:10AM</label>
-				<input type="radio" name="selectedTime" id="18" value="9:20:00"><label class="p-label four col" for="18">9:20AM</label>
-				<input type="radio" name="selectedTime" id="19" value="9:30:00"><label class="premium-label four col" for="19">9:30AM</label>
-				<input type="radio" name="selectedTime" id="20" value="9:40:00"><label class="b-label four col" for="20">9:40AM</label>
-				
-			</section>
-			
-			<section class="plan cf">
-			<input type="radio" name="selectedTime" id="21" value="9:50:00"><label class="p-label four col" for="21">9:50AM</label>
-				<input type="radio" name="selectedTime" id="22" value="10:00:00"><label class="premium-label four col" for="22">10:00AM</label>
-				<input type="radio" name="selectedTime" id="23" value="10:10:00"><label class="b-label four col" for="23">10:10AM</label>
-				<input type="radio" name="selectedTime" id="24" value="10:20:00"><label class="p-label four col" for="24">10:20AM</label>
-				<input type="radio" name="selectedTime" id="25" value="10:30:00"><label class="p-label four col" for="25">10:30AM</label>
-			</section>
-		
+                                for ($i=0; $i<5; $i++){
+                                    
+                                    
+                              
+                                   echo '<input type="radio" name="selectedTime" id="'.$hour.':'.$minute.'" value=' . $hour. ':'.$minute.'><label class="label four col" for="'.$hour.':'.$minute.'"  id="'.$hour.':'.$minute.'L" >' . $hour . ':'.$minute.' AM</label>';
+                                  
+                                  $counter++;
+                                
+                                    $minute += 10;
+                                    if( $minute >= 60){
+                                        $minute -= 60;
+                                        $hour++;
+                                        if ($minute == 0){
+                                            $minute= $minute."0";
+                                        }
+                                    }
+                                }
+                             
+			echo'</section>';
+                        }
+                        ?>
+
 		       <!-- Hidden input to transfer it to the other page --> 
                        
                        <input type="hidden" name="firstName" value=" <?php echo $_POST['firstName'];?>" >
@@ -197,24 +178,78 @@ function  checkDatabased (){
 		 </form>
                    <script> 
                              
-                             
-function mondayFunction(){
-  
-var temp ;
- temp = "<?php checkDatabased();?>"; 
-for (i = 0; i <25; i++){
+                         
+function disableButtons(selectedDay){
+
+undisalbeButtons();
+var dublicetArray = []; 
+var temp; 
+var tempTime; 
+var time; 
+var date; 
+
+
+dublicetArray= JSON.parse('<?php duplicate();?>');
+
+for (i = 0; i < dublicetArray.length; i++){
    
-
-  temp = "<?php checkDatabased();?>"; 
-alert(temp);
-alert("test"+i);
-
-
+temp=dublicetArray[i];
+  
+  date = temp.substring(5, 10);
+  tempTime = temp.substring(11, 16);
+  
+  if (selectedDay === date){
+     
+     
+     var removeZero = tempTime.substring(0, 1);
+     if (removeZero === '0'){
+         time = tempTime.substring(1, 5);
+         
+         } 
+         else {
+             time = tempTime; 
+         }
     
+       document.getElementById(time).disabled =true ; 
+        var label = document.getElementById(time+"L");
+        label.style.color = "red"; 
+           label.style.setProperty ("text-decoration", "line-through");
+}
+
   }
 
 }
-                             
+
+function undisalbeButtons(){
+        var hour = 6;
+        var minute = 30;
+        var time ;
+        
+    for (i=0; i<25; i++){
+        
+     time = hour +":"+minute; 
+    /*  document.getElementById(time).disabled =false ; 
+        var label = document.getElementById(time+"L");
+        label.style.color = "white"; 
+           label.style.setProperty ("text-decoration", "none");*/
+            alert(time); 
+            minute += 10;
+          if( minute >= 60){
+              minute -= 60;
+              hour++;
+          
+           if (minute === 0){
+               minute= '0'+ minute;
+              }
+          }   
+       }
+    
+}
+
+
+
+
+                         
                              
   </script>            
 

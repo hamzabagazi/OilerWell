@@ -260,6 +260,6 @@ function undisalbeButtons(){
        <p class="footerP"> 120 West Foulke Ave, Findlay, OH 45840 | (419)434-4550 | cosiano@findlay.edu</p>
 	   
 	   </footer>
-	   <!-- <script src="script.js"></script> -->
+	  
 	</body>
    </html>

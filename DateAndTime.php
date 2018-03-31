@@ -221,30 +221,36 @@ temp=dublicetArray[i];
 }
 
 function undisalbeButtons(){
-        var hour = 6;
-        var minute = 30;
-        var time ;
-        
-    for (i=0; i<25; i++){
-        
-     time = hour +":"+minute; 
-    /*  document.getElementById(time).disabled =false ; 
+        var tempTime='06:30' ;
+        var time; 
+         for (i=0; i<25; i++){
+       var removeZero = tempTime.substring(0, 1);
+     if (removeZero === '0'){
+         time = tempTime.substring(1, 5);
+         
+         } 
+         else {
+             time = tempTime; 
+         }
+        //make the buttons undisable 
+      document.getElementById(time).disabled =false ; 
+      document.getElementById(time).checked = false;
         var label = document.getElementById(time+"L");
         label.style.color = "white"; 
-           label.style.setProperty ("text-decoration", "none");*/
-            alert(time); 
-            minute += 10;
-          if( minute >= 60){
-              minute -= 60;
-              hour++;
-          
-           if (minute === 0){
-               minute= '0'+ minute;
-              }
-          }   
+        label.style.setProperty ("text-decoration", "none"); 
+            
+          tempTime= addMinutes(time, 10);
        }
     
 }
+
+ function addMinutes(time, minsToAdd) {
+  function D(J){ return (J<10? '0':'') + J;};
+  var piece = time.split(':');
+  var mins = piece[0]*60 + +piece[1] + +minsToAdd;
+
+  return D(mins%(12*60)/60 | 0) + ':' + D(mins%60);  
+}  
 
 
 

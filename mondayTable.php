@@ -1,11 +1,10 @@
  <?php
  
-  session_start(); 
+ session_start(); 
  if (!$_SESSION["login_user"])
 {
     header("location:oilerWellAdmin.php?notlogedin=You are not Administrator!"); 
 }
-
  //Connection + database
 $user = "root"; 
 $password = ""; 
@@ -44,13 +43,13 @@ function convert ($tableDateTime){
 <!DOCTYPE html>
 <html lang="en">
  <head>
-      <title>Appointment Table</title>
+      <title>Monday Appointment</title>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
       <script src="modernizr.custom.40753.js"></script>
       <!-- CSS for the table --> 
-     <link href="gisttech/css/bootstrap.min_1.css" rel="stylesheet" type="text/css"/>
+      <link href="gisttech/css/bootstrap.min_1.css" rel="stylesheet" type="text/css"/>
       <link href="gisttech/css/tableexport.min.css" rel="stylesheet" type="text/css"/>
       <!-- The end for CSS --> 
       <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
@@ -101,18 +100,15 @@ function convert ($tableDateTime){
    
   <article>
         <div class="container">
-		  <h2> Database</h2>  
+		  <h2> Monday Appointments</h2>  
 	       <table id ="Appointments" class ="table table-bordered" >
                    <thead>
  <tr>
   <th>Id</th> 
   <th>First</th> 
   <th>Last</th> 
-  <th>Email</th>
-  <th>Phone</th>
   <th>Date</th>
   <th>Blood</th> 
-  <th>Code</th> 
  </tr>
              </thead>
              <tbody>
@@ -120,7 +116,7 @@ function convert ($tableDateTime){
 
    $row_counter = 1; 
   
-  $sql = "SELECT  firstName, lastName, email, phone, dateTime, blood, code FROM users ORDER BY dateTime  ASC";
+  $sql = "SELECT  firstName, lastName, dateTime, blood FROM users WHERE dateTime LIKE '%11-05%' ORDER BY dateTime  ASC";
   $result = mysqli_query($mysql, $sql);
   
   if ($result->num_rows > 0) {
@@ -131,11 +127,8 @@ function convert ($tableDateTime){
        
        . "<td>" . $row["firstName"] . "</td>"
        . "<td>" . $row["lastName"]. "</td>"
-       . "<td>" . $row["email"]. "</td>"
-       . "<td>" . $row["phone"]. "</td>"
        . "<td>" .  date_format(convert ($row["dateTime"]), ' l F jS Y \a\t g:ia '). "</td>"
        . "<td>" . $row["blood"]. "</td>"
-       .  "<td>" . $row["code"]. "</td>"
               . "</tr>";
             $row_counter++; 
 }
@@ -145,9 +138,7 @@ $mysql->close();
 ?>
              </tbody>
 </table>
-	<!--<form action="excel.php" method="post" class ="centerButton"> 
-            <input type="submit" id="nextButton" name="export_excel" class="btn btn-succes" value="Export to Excel"  />  
-      </form> 	 -->
+	
   </div> 
       <script src="gisttech/js/bootstrap.min_1.js" type="text/javascript"></script>
       <script src="gisttech/js/FileSaver.min.js" type="text/javascript"></script>

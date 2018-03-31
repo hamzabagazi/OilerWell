@@ -85,9 +85,11 @@ if (!mysqli_select_db($mysql, $dbase)){
   <article>
         <div class="container">
 		  <h2> Admin</h2>  
-	       <form  action="ChangeAppt.php" method="post">
+	       <form  action="login.php" method="post">
 		     <fieldset class ="requiredInfoChange" align="center">
-				
+                         <h3 style="color: red;"> <?php echo @$_GET["logout"]?></h3>
+                         <h3 style="color: red;"> <?php echo @$_GET["invalid"]?></h3>
+                         <h3 style="color: red;"> <?php echo @$_GET["notlogedin"]?></h3>
 				<label for="emailinput">
 					
 					<input type="text" name="userName" id="emailinput"
@@ -95,10 +97,10 @@ if (!mysqli_select_db($mysql, $dbase)){
 				</label>
 				<label for="adminPassword">
 					
-                                        <input type="password" name="code" id="codeInput" placeholder="Password">
+                                        <input type="password" name="password" id="codeInput" placeholder="Password">
 					   
 				</label>
-				  <input type="submit" id="loginButton" value="Login" name="loging">
+				  <input type="submit" id="loginButton" value="Login" name="login">
 				</fieldset>
 			  </form>
 	

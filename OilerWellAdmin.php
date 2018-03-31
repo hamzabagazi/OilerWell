@@ -33,17 +33,13 @@ if (!mysqli_select_db($mysql, $dbase)){
  <head>
       <title>Appointment Table</title>
     
-      <meta charset="utf-8">
+        <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
       <script src="modernizr.custom.40753.js"></script>
-      <!-- CSS for the table --> 
-      <link href="gisttech/css/bootstrap.min_1.css" rel="stylesheet" type="text/css"/>
-      <link href="gisttech/css/tableexport.min.css" rel="stylesheet" type="text/css"/>
-      <!-- The end for CSS --> 
       <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="styles.css">
-      <link rel="shortcut icon" href="images/oilerwell_logo_icon.ico">
+	  <link rel="shortcut icon" href="images/oilerwell_logo_icon.ico">
    </head>
    
    <body>
@@ -90,19 +86,19 @@ if (!mysqli_select_db($mysql, $dbase)){
         <div class="container">
 		  <h2> Admin</h2>  
 	       <form  action="ChangeAppt.php" method="post">
-		     <fieldset class ="requiredInfoChange">
+		     <fieldset class ="requiredInfoChange" align="center">
 				
 				<label for="emailinput">
 					
-					<input type="email" name="email" id="emailinput"
+					<input type="text" name="userName" id="emailinput"
 					placeholder="UserName" required >
 				</label>
-				<label for="confirmationCodeinput">
+				<label for="adminPassword">
 					
                                         <input type="password" name="code" id="codeInput" placeholder="Password">
-					    <input type="submit" id="goButton" value="Login">
+					   
 				</label>
-				 
+				  <input type="submit" id="loginButton" value="Login" name="loging">
 				</fieldset>
 			  </form>
 	

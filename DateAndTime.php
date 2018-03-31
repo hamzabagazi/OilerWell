@@ -50,7 +50,7 @@ function duplicate(){
      
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
-     <!-- <script src="modernizr.custom.40753.js"></script> -->
+ 
       <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
 	   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="styles.css">
@@ -103,9 +103,6 @@ function duplicate(){
 		
 		 <h2> Date And Time </h2>  
 		  
-		   
-		   
-		
 		
 		<form class="dateForm cf" action= "apptSummary.php" method="post" > 
 			 <p class="generalP"> Please Select Date:  </p> 

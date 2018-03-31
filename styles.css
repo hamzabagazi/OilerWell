@@ -374,7 +374,7 @@ fieldset {
 .centerButton{
 	text-align: center; 
 }
-#nextButton, #backButton {
+#nextButton, #backButton, #loginButton {
 	
    border: none;
    border-bottom: 1px solid #666;

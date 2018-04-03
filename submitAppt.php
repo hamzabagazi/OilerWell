@@ -1,4 +1,8 @@
 <?php 
+
+session_start();
+session_destroy(); 
+
 //Connection + database
 $user = "root"; 
 $password = ""; 
@@ -36,9 +40,7 @@ require 'vendor/autoload.php';
     $email = trim($_POST['email']);
     $phone = trim($_POST['phone']);
     $drawblood = trim($_POST['drawblood']);
-    $selectedDate = $_POST['selectedDate'];
-    $selectedTime = $_POST['selectedTime'];
-    $dateTime = trim($selectedDate." ". $selectedTime);
+    $dateTime = trim($_POST['dateTime']);
    // $selectedTime = trim($_POST['selectedTime']);
     $uniqueCode = TRUE; 
     $format; 

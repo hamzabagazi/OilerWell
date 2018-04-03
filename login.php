@@ -36,7 +36,7 @@ if (isset($_POST["login"])){
         header("location:adminHomePage.php");
     }
     else {
-        header("location:OilerWellAdmin.php?invalid=Your username or password are incorrect. Please Try again.");
+        header("location:OilerWellAdmin.php?invalid=Your username or password are incorrect. Please try again.");
     }
     
 }

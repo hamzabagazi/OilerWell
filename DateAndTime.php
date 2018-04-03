@@ -1,5 +1,6 @@
 <?php 
-
+session_start();
+ 
 $user = "root"; 
 $password = ""; 
 $host = "localhost"; 
@@ -37,8 +38,39 @@ function duplicate(){
      
      echo json_encode($full);
 
+    }
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+        if (isset($_POST['selectedDate'])){
+             
+            if (isset($_POST['selectedTime'])){
+                
+                 $selectedDate = $_POST['selectedDate'];
+                 $selectedTime = $_POST['selectedTime'];
+                 $dateTime = trim($selectedDate." ". $selectedTime);
+                 $_SESSION['dateTime'] = $dateTime; 
+                 header("location: apptSummary.php");   
+            }
+            
+            else {
+                 echo '<script language="javascript">';
+                 echo 'alert("Please select a time ")';
+                 echo '</script>';
+            }
+           
+        }
+        else {
+           echo '<script language="javascript">';
+                 echo 'alert("Please select a date ")';
+                 echo '</script>'; 
+            
+
+       }
+        
 }
+
 
 ?>
 
@@ -104,7 +136,7 @@ function duplicate(){
 		 <h2> Date And Time </h2>  
 		  
 		
-		<form class="dateForm cf" action= "apptSummary.php" method="post" > 
+                 <form class="dateForm cf" action= "DateAndTime.php" method="post" > 
 			 <p class="generalP"> Please Select Date:  </p> 
 			 <section class="plan cf">
 				
@@ -151,31 +183,35 @@ function duplicate(){
                         }
                         ?>
 
-		       <!-- Hidden input to transfer it to the other page --> 
-                       
-                       <input type="hidden" name="firstName" value=" <?php echo $_POST['firstName'];?>" >
-		
-                       <input type="hidden" name="lastName" value=" <?php echo $_POST['lastName'];?>">
-				
-                       <input type="hidden" name="email" value=" <?php echo $_POST['email'];?>">
-				
-                       <input type="hidden" name="phone" value=" <?php echo $_POST['phone'];?>">
-			
-                       <input type="hidden" name="drawblood" value=" <?php echo $_POST['drawblood'];?>">
+		      
+                      
 					
 
 		
 	
 		  <fieldset class="nextButton">
                     
-                      <input type="submit" id="nextButton" value="Next"  href="apptSummary.html"  style="float: right;">
+                      <input type="submit" id="nextButton" value="Next"    style="float: right;">
+                      
                    </fieldset>
-                       
-                       
 		 </form>
+                   
+                   <button id="backButton" style="float: left; margin-top:-89px;" onclick="goBack()" >Back</button>
+             
+                       
+                      
+
+
+
+
+                 </form>
                    <script> 
                              
-                         
+  function goBack() {
+    window.history.back();
+}
+
+
 function disableButtons(selectedDay){
 
 undisalbeButtons();

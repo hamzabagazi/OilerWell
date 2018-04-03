@@ -3,7 +3,7 @@
  session_start(); 
  if (!$_SESSION["login_user"])
 {
-    header("location:oilerWellAdmin.php?notlogedin=You are not Administrator!"); 
+    header("location:oilerWellAdmin.php?notlogedin=You are not an administrator!"); 
 }
  //Connection + database
 $user = "root"; 

@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 
 //Connection + database
 $user = "root"; 
@@ -27,14 +28,17 @@ $status='display:none;';
 $firstName = "first";
 $lastName = "last";
 $email = "email";
-$phone = "5";
+$phone = "none";
 $dateTime="dateTime";
 $blood = "bloodAns";
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-$emailPost = trim($_POST['email']);
 
-$codePost = $_POST['code'];
+
+if (count($_GET)>0)
+{
+    
+$emailPost = trim($_GET['email']);
+
+$codePost = $_GET['code'];
 
 
 $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'";
@@ -43,15 +47,17 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 
  if ($result->num_rows > 0) {
      while($row = $result->fetch_assoc()) {
-         $id= trim($row["id"]);
-         $firstName = trim($row["firstName"]);
-         $lastName = trim($row["lastName"]);
-         $email = trim($row["email"]);
-         $phone = trim($row["phone"]);
-         $dateTime = trim($row["dateTime"]);
-         $blood = trim($row["blood"]);
-         $code = trim($row["code"]);
+  
+         
+         $GLOBALS['firstName'] = trim($row["firstName"]);
+         $GLOBALS['lastName']= trim($row["lastName"]);
+         $GLOBALS['email'] = trim($row["email"]);
+         $GLOBALS['phone'] = trim($row["phone"]);
+         $GLOBALS['dateTime'] = trim($row["dateTime"]);
+         $GLOBALS['blood'] = trim($row["blood"]);
          $status = 'none';
+         
+        
         
          
      }
@@ -65,19 +71,35 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
         echo '</script>';
              
  }
-//$success = database_insert(sprintf("insert into registrations (sname, pname) values ('%s','%s')", $sname, $pname));
-//if ($success == true)
-//redirect_to('Success.php');
-// if first display, or error, the html below will show.
-// on error, text boxes will have previously entered values.
+ 
+
+ 
+     
+
+
+
+ 
 }
 
- function convert ($dateTime){
-        
-        $fomattedDateTime=  date_create($dateTime);
-        
-        return $fomattedDateTime;
-    }
+ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+       global $firstName; 
+    global $lastName; 
+    global $email; 
+    global $phone; 
+    global $blood;
+     $_SESSION['firstName']= $_POST['firstName'];   
+    $_SESSION['lastName'] =  $_POST['lastName'];
+    $_SESSION['email']= $_POST['email'];
+    $_SESSION['phone'] =  $_POST['phone'];
+    $_SESSION['drawblood'] = $_POST['drawblood'];
+    header("location: DateAndTime.php"); 
+     
+ }
+
+
+
+
+
 ?>
 
 
@@ -85,14 +107,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 <html lang="en">
  <head>
        <title>OilerWell</title>
-      <!-- 
-         Lakeland Reeds Bed & Breakfast main web page
-         Filename: index.html
-
-         Author:   
-         Date:     
-         
-      -->
+      
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
       <script src="modernizr.custom.40753.js"></script>
@@ -146,7 +161,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
         <div class="container">
 		<h2> View/Change An Appointment </h2> 
 		<p class="generalP"> Enter the email you used to sign-up and the confirmation code from the email.  </p>
-                <form  action="ChangeAppt.php" method="post">
+                <form  action="ChangeAppt.php" method="get">
 		     <fieldset class ="requiredInfoChange">
 				
 				<label for="emailinput">
@@ -164,7 +179,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 			  </form>
                 
                 
-                <form action="DateAndTime.php" method="post"> 
+                <form action="ChangeAppt.php" method="POST"> 
 				 
                     <div class="summary-preview"  style="<?php echo  $status; ?>">
                       <div class="table-row">
@@ -198,14 +213,14 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
                        <p>Appointment Time:</p>
                      </div>	
                        <div class="table-cell">
-                        <!-- <p class="summary-date" class="summary-time"></p> --> 
-                          <p > <?php  echo date_format(convert($dateTime), 'g:ia \o\n l jS F Y'); ?>  </p>  
+                       
+                          <p > <?php  echo date_format(date_create($dateTime), 'g:ia \o\n l jS F Y'); ?>  </p>  
                        </div>
                    </div>
 				  
  
 	</div>
-		  <input type="hidden" name="firstName" value=" <?php echo $firstName;?>" >
+                    <input type="hidden" name="firstName" value=" <?php echo $firstName;?>" >
 		
                        <input type="hidden" name="lastName" value=" <?php echo $lastName;?>">
 				
@@ -215,10 +230,11 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 			
                        <input type="hidden" name="drawblood" value=" <?php echo $blood;?>">
                        <input type="hidden" name="dateTime" value=" <?php echo $dateTime;?>">
-                       		
+
+		  
 				
 				 <fieldset class="nextButton">
-                   <input type="submit" id="nextButton" value="Change" style="float: right; <?php echo  $status; ?>" >
+                                     <input type="submit" id="nextButton" value="Change" style="float: right; <?php echo  $status; ?>" >
                    </fieldset>
 		  </form>
 		</div> 

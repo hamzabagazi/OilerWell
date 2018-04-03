@@ -1,36 +1,14 @@
 <?php 
+session_start();
 
- $firstName = $_POST['firstName'];   
-    $lastName = $_POST['lastName'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $drawblood = $_POST['drawblood'];
-    $selectedDate = $_POST['selectedDate'];
-    $selectedTime = $_POST['selectedTime'];
-    
-    function convert ($selectedDate, $selectedTime){
-        $compained= $selectedDate." ". $selectedTime; 
-        $dateTime=  date_create($compained);
-        
-        return $dateTime;
-    }
-    
-    $dateTime= convert ($selectedDate, $selectedTime);
-    
+
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
  <head>
       <title>OilerWell</title>
-      <!-- 
-        
       
-         Filename: index.html
-
-         Author:   
-         Date:     
-         
-      -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
       <script src="modernizr.custom.40753.js"></script>
@@ -91,7 +69,7 @@
                        <p>Name:</p>
                      </div>
                        <div class="table-cell">
-                         <p> <?php  echo $firstName ?> <?php  echo $lastName ?>  </p>
+                         <p> <?php  echo $_SESSION['firstName'] ?> <?php  echo $_SESSION['lastName'] ?>  </p>
                        </div>
                    </div>
 				   <div class="table-row">
@@ -99,7 +77,7 @@
                        <p>Email:</p>
                      </div>
                        <div class="table-cell">
-                         <p> <?php  echo $email ?></p>
+                         <p> <?php  echo $_SESSION['email'] ?></p>
                        </div>
                    </div>
 				   <div class="table-row">
@@ -107,7 +85,7 @@
                        <p>Phone:</p>
                      </div>
                        <div class="table-cell">
-                         <p> <?php  echo $phone ?></p>
+                         <p> <?php  echo $_SESSION['phone'] ?></p>
                        </div>
                    </div>
 				   
@@ -116,7 +94,7 @@
                        <p>PA student blood draw:</p>
                      </div>
                        <div class="table-cell">
-                         <p> <?php  echo $drawblood  ?></p>
+                         <p> <?php  echo $_SESSION['drawblood']  ?></p>
                        </div>
                    </div>
 				   <div class="table-row">
@@ -125,30 +103,38 @@
                      </div>	
                        <div class="table-cell">
                         <!-- <p class="summary-date" class="summary-time"></p> --> 
-                          <p > <?php  echo date_format($dateTime, 'g:ia \o\n l jS F Y'); ?>   </p>  
+                          <p > <?php  echo date_format(date_create($_SESSION['dateTime']), 'g:ia \o\n l jS F Y'); ?>   </p>  
                        </div>
                    </div>
 				  
 				   
 			 
 		    </div>
-			  <input type="hidden" name="firstName" value=" <?php echo $_POST['firstName'];?>" >
+                      
+			  <input type="hidden" name="firstName" value=" <?php echo $_SESSION['firstName'];?>" >
 		
-                       <input type="hidden" name="lastName" value=" <?php echo $_POST['lastName'];?>">
+                       <input type="hidden" name="lastName" value=" <?php echo $_SESSION['lastName'];?>">
 				
-                       <input type="hidden" name="email" value=" <?php echo $_POST['email'];?>">
+                       <input type="hidden" name="email" value=" <?php echo $_SESSION['email'];?>">
 				
-                       <input type="hidden" name="phone" value=" <?php echo $_POST['phone'];?>">
+                       <input type="hidden" name="phone" value=" <?php echo $_SESSION['phone'];?>">
 			
-                       <input type="hidden" name="drawblood" value=" <?php echo $_POST['drawblood'];?>">
-                       <input type="hidden" name="selectedDate" value=" <?php echo $_POST['selectedDate'];?>">
-                       <input type="hidden" name="selectedTime" value=" <?php echo $_POST['selectedTime'];?>">
+                       <input type="hidden" name="drawblood" value=" <?php echo $_SESSION['drawblood'];?>">
+                       <input type="hidden" name="dateTime" value=" <?php echo $_SESSION['dateTime'];?>">
+                      
                        
 			  <fieldset class="nextButton">
                               <input type="submit" name="submit" id="nextButton" value="Submit"  style="float: right;">
                    </fieldset>
                   </form>
-		
+                      <button id="backButton" style="float: left; margin-top:-89px;" onclick="goBack()" >Back</button>
+		 <script> 
+                             
+            function goBack() {
+              window.history.back();
+                } 
+                </script> 
+
 		</div> 
    
     </article>

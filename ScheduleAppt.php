@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $_SESSION['email']= $_POST['email'];
     $_SESSION['phone'] = $_POST['phone'];
     $_SESSION['drawblood'] = $_POST['drawblood'];
+    $_SESSION['purpose'] = "schedule"; 
     header("location: DateAndTime.php");    
 }
 
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>OilerWell</title>
+        <title>Schedule An Appointment-OilerWell</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
@@ -106,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </label>
                         <label for="phoneinput">
                             <p class= "labelP">Phone:</p>
-                            <input type="tel" name="phone" id="phoneinput" placeholder="Phone Number"   minlength="10" maxlength="12">
+                            <input type="tel" name="phone" id="phoneinput" placeholder="Phone Number"   minlength="10" maxlength="12" >
                         </label>
                     </fieldset>
 

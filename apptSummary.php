@@ -121,6 +121,7 @@ session_start();
 			
                        <input type="hidden" name="drawblood" value=" <?php echo $_SESSION['drawblood'];?>">
                        <input type="hidden" name="dateTime" value=" <?php echo $_SESSION['dateTime'];?>">
+                        <input type="hidden" name="purpose" value=" <?php echo $_SESSION['purpose'];?>">
                       
                        
 			  <fieldset class="nextButton">

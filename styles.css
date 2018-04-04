@@ -250,10 +250,10 @@ article h2{
 
 
 .generalP{
-	padding: 0.6em 0.5em 1em;
+	padding: 0.6em 1em;
 	font-size: 1.5em;
 	margin-left: 1.2em; 
-	margin-bottom: 0.3em;
+	margin-bottom: 0.7em;
 	text-align: left;
 }
 
@@ -296,7 +296,7 @@ article li{
 }
 
 form {
-	padding: 30px;
+	padding: 20px 30px;
 }
 /* fieldset styles */
 fieldset {
@@ -310,25 +310,21 @@ fieldset {
 	padding-left: 3em;
 	
 }
-.requiredInfoChange label {
+.requiredInfoChange label, .requiredInfoSignUp label {
 	display: block;
 	position: relative;
-	margin: 0.5em 0.2em;
+	margin: 0.5em 0;
 	font-size: 1.5em;
+        padding-left: 10%; 
 	
 }
-.requiredInfoSignUp label{
-	display: block;
-	position: relative;
-	margin: 0.5em 0.2em;
-	font-size: 1.5em;
-}
+
 .bloodQuestion label {
     display: block;
 	position: relative;
-    margin: 0.5em 0.2em;
+    margin: 0.5em 0;
 	font-size: 1.4em;
-	padding-left: 3.8em;
+	padding-left: 13.5%;
  }
  
 
@@ -337,7 +333,7 @@ fieldset {
 
 .bloodQuestionP{
 	font-size: 1.4em; 
-	margin-left: 3.5em; 
+	margin-left: 10.5%; 
 	padding-top: 0.8em;
 }
 
@@ -391,7 +387,7 @@ fieldset {
 	
 }
 
-#nextButton, #backButton, #loginButtonH {
+#nextButton, #backButton, #loginButton {
 	
    border: none;
    border-bottom: 1px solid #666;
@@ -456,7 +452,8 @@ label:before {
 }
 .table-cell {
    padding: 0 0.2em;
-   display: table-cell;
+  /* display: table-cell;*/
+     display: -webkit-inline-box;
 }
 
 

@@ -101,7 +101,7 @@ function convert ($tableDateTime){
   <article>
         <div class="container">
 		  <h2> Friday Appointments</h2>  
-	       <table id ="Appointments" class ="table table-bordered" >
+	       <table id ="Friday-Appointments" class ="table table-bordered" >
                    <thead>
  <tr>
   <th>Id</th> 
@@ -145,7 +145,7 @@ $mysql->close();
       <script src="gisttech/js/jquery-3.1.1.min.js" type="text/javascript"></script>
       <script src="gisttech/js/tableexport.min.js" type="text/javascript"></script>
       <script>
-      $('#Appointments').tableExport();
+      $('#Friday-Appointments').tableExport();
       </script>
     </article>
 	<footer>

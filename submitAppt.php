@@ -41,33 +41,22 @@ require 'vendor/autoload.php';
     $phone = trim($_POST['phone']);
     $drawblood = trim($_POST['drawblood']);
     $dateTime = trim($_POST['dateTime']);
-   // $selectedTime = trim($_POST['selectedTime']);
-    $uniqueCode = TRUE; 
+   
+    
     $format; 
     
+  //make sure there's a request from ether SingUp/Change Appt  
+  if(isset($_POST['purpose'])){
     
-   
-    
-    // Creat a random code and make sure that there's no duplicate code number
-   while ($uniqueCode){
-        
-       $code= rand(10000,99999); 
-       $query = "SELECT * FROM users WHERE code = '$code'"; 
-    $result = mysqli_query($mysql, $query);
-      if(mysqli_num_rows($result) == 0) {
-        $uniqueCode = FALSE; 
-      }
-        //else {
-        //    echo "inside the loop";
-        //}
-      
-    }
-
-   
-    $sql = "SELECT * FROM `users` WHERE firstName = '$firstName' AND email = '$email'";
+      $purpose = trim($_POST['purpose']);
+      //do the process for change Appointment 
+      if ($purpose == "change")
+      {
+        $sql = "SELECT * FROM `users` WHERE firstName = '$firstName' AND email = '$email'";
     
     $result = mysqli_query($mysql, $sql);
    
+   //update the database with the new appointment date.
 if ($result->num_rows > 0){
      while($row = $result->fetch_assoc()){
     $id = trim($row["id"]);
@@ -80,7 +69,7 @@ if ($result->num_rows > 0){
         
            header("refresh:0; url=main.html");
            
-            email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code);
+           email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code);
        echo '<script language="javascript">';
         echo 'alert("Your appointment has been successfully rescheduled, Thank you.")';
         echo '</script>';
@@ -91,14 +80,29 @@ if ($result->num_rows > 0){
         
     }
      else {
-       // header("location: ScheduleAppt.php");
+       
              echo '<script language="javascript">';
         echo 'alert("Unable to reschedule your appointment, Please try again. ")';
         echo '</script>';
-    }
-}
-elseif ($result->num_rows == 0){
+         header("refresh:0; url= ScheduleAppt.php");
+       }
+    }   
+          
+ }//end of changing Appoitment part 
   
+ //do the process for schedule Appointment 
+ elseif ($purpose == "schedule"){
+     
+      $sql = "SELECT * FROM `users` WHERE firstName = '$firstName' AND email = '$email'";
+    
+    $result = mysqli_query($mysql, $sql);
+   
+     //make sure that no one singup twice
+     if ($result->num_rows == 0){
+        
+         
+         
+    $code =  code (); 
     $sql = "INSERT INTO users (firstName, lastName, email, phone, dateTime, blood, code)"
             . "VALUES('$firstName', '$lastName', '$email', '$phone',  '$dateTime', '$drawblood', '$code')"; 
 
@@ -112,16 +116,41 @@ elseif ($result->num_rows == 0){
         echo '</script>';
        }
 }
-
-else {
+  else {
+        
+         header("refresh:0; url=ScheduleAppt.php");
+          echo '<script language="javascript">';
+        echo 'alert("Your email is exist in the database, Please use different Email.")';
+        echo '</script>';
+      
+     }
+  }
+  else {
     
-        header("refresh:1; url=ScheduleAppt.php");
-        header("location: ScheduleAppt.php");
+        header("refresh:0; url=ScheduleAppt.php");
+        
              echo '<script language="javascript">';
         echo 'alert("Appointment could not be added to the database!")';
         echo '</script>';
     
-}
+        }
+  
+      
+   }
+  
+  else{
+     echo '<script language="javascript">';
+        echo 'alert("Unable to process your request, Please try again.")';
+        echo '</script>'; 
+          header("refresh:0; url= ScheduleAppt.php");
+    }
+
+    
+   
+   
+
+
+
 
 
 function email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code){
@@ -180,7 +209,22 @@ try {
 }
 
 
-   
+function code (){
+    $uniqueCode = TRUE; 
+    // Creat a random code and make sure that there's no duplicate code number
+   while ($uniqueCode){
+        
+       $code= rand(10000,99999); 
+       $query = "SELECT * FROM users WHERE code = '$code'"; 
+       $result = mysqli_query($GLOBALS['mysql'], $query);
+      if(mysqli_num_rows($result) == 0) {
+        $uniqueCode = FALSE; 
+      }
+       
+         }
+         
+      return $code; 
+    }   
 
 
 ?>

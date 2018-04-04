@@ -43,7 +43,7 @@ function convert ($tableDateTime){
 <!DOCTYPE html>
 <html lang="en">
  <head>
-      <title>Thursday Appointment</title>
+      <title>Thursday Appointments</title>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
@@ -101,7 +101,7 @@ function convert ($tableDateTime){
   <article>
         <div class="container">
 		  <h2> Thursday Appointments</h2>  
-	       <table id ="Appointments" class ="table table-bordered" >
+	       <table id ="Thursday-Appointments" class ="table table-bordered" >
                    <thead>
  <tr>
   <th>Id</th> 
@@ -145,7 +145,7 @@ $mysql->close();
       <script src="gisttech/js/jquery-3.1.1.min.js" type="text/javascript"></script>
       <script src="gisttech/js/tableexport.min.js" type="text/javascript"></script>
       <script>
-      $('#Appointments').tableExport();
+      $('#Thursday-Appointments').tableExport();
       </script>
     </article>
 	<footer>

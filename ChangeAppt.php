@@ -55,6 +55,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
          $GLOBALS['phone'] = trim($row["phone"]);
          $GLOBALS['dateTime'] = trim($row["dateTime"]);
          $GLOBALS['blood'] = trim($row["blood"]);
+         $_SESSION['purpose'] = "change"; 
          $status = 'none';
          
         
@@ -106,7 +107,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 <!DOCTYPE html>
 <html lang="en">
  <head>
-       <title>OilerWell</title>
+       <title>Change-OilerWell</title>
       
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">

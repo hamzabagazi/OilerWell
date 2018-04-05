@@ -215,7 +215,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
                      </div>	
                        <div class="table-cell">
                        
-                          <p > <?php  echo date_format(date_create($dateTime), 'g:ia \o\n l jS F Y'); ?>  </p>  
+                          <p > <?php  echo date_format(date_create($dateTime), 'g:ia \o\n l F jS Y'); ?>  </p>  
                        </div>
                    </div>
 				  

@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                    </fieldset>
 		 </form>
                    
-                   <button id="backButton" style="float: left; margin-top:-89px;" onclick="goBack()" >Back</button>
+                   <button id="backButton" style="float: left; margin-top:-9%;" onclick="goBack()" >Back</button>
              
                        
                       

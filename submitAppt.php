@@ -120,7 +120,7 @@ if ($result->num_rows > 0){
         
          header("refresh:0; url=ScheduleAppt.php");
           echo '<script language="javascript">';
-        echo 'alert("Your email is exist in the database, Please use different Email.")';
+        echo 'alert("This information has already been used, please try again.")';
         echo '</script>';
       
      }
@@ -191,7 +191,7 @@ try {
             . '<tr><td><strong>Email:</strong> </td><td> '. $email .' </td></tr> '
             . '<tr><td><strong>Phone:</strong> </td><td>' . $phone . '</td></tr>'
             . ' <tr><td><strong>Are you willing to have a PA student draw your blood?</strong> </td><td>' . $drawblood . '</td></tr> '
-            . '<tr><td><strong>Appointment Time:</strong> </td><td>' . $dateTime . '</td></tr>'
+            . '<tr><td><strong>Appointment Time:</strong> </td><td>' . date_format(date_create($dateTime), 'd/m/Y \a\t H:i \A\M') . '</td></tr>'
             . ' <tr><td><strong>Confirmation code:</strong> </td><td>' . $code . '</td></tr> '
             . '</table> '
             . '<P><b>*Note:</b> You need to use the confirmation code to View/Change the appointment.</p> '

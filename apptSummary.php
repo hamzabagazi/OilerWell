@@ -103,7 +103,7 @@ session_start();
                      </div>	
                        <div class="table-cell">
                         <!-- <p class="summary-date" class="summary-time"></p> --> 
-                          <p > <?php  echo date_format(date_create($_SESSION['dateTime']), 'g:ia \o\n l jS F Y'); ?>   </p>  
+                          <p > <?php  echo date_format(date_create($_SESSION['dateTime']), 'g:ia \o\n l F jS Y'); ?>   </p>  
                        </div>
                    </div>
 				  
@@ -128,7 +128,7 @@ session_start();
                               <input type="submit" name="submit" id="nextButton" value="Submit"  style="float: right;">
                    </fieldset>
                   </form>
-                      <button id="backButton" style="float: left; margin-top:-89px;" onclick="goBack()" >Back</button>
+                      <button id="backButton" style="float: left; margin-top:-79px;" onclick="goBack()" >Back</button>
 		 <script> 
                              
             function goBack() {

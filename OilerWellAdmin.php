@@ -31,7 +31,7 @@ if (!mysqli_select_db($mysql, $dbase)){
 <!DOCTYPE html>
 <html lang="en">
  <head>
-      <title>OilerWell</title>
+      <title>Admin-OilerWell</title>
     
         <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">

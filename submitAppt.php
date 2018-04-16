@@ -34,18 +34,15 @@ require 'vendor/autoload.php';
 
 
 
- 
+ //initialize the user information to php variables 
     $firstName = trim($_POST['firstName']);   
     $lastName = trim($_POST['lastName']);
     $email = trim($_POST['email']);
     $phone = trim($_POST['phone']);
     $drawblood = trim($_POST['drawblood']);
     $dateTime = trim($_POST['dateTime']);
-   
     
-    $format; 
-    
-  //make sure there's a request from ether SingUp/Change Appt  
+  //make sure there's a request from ether SignUp/Change Appt  
   if(isset($_POST['purpose'])){
     
       $purpose = trim($_POST['purpose']);
@@ -69,58 +66,65 @@ if ($result->num_rows > 0){
         
            header("refresh:0; url=main.html");
            
-           email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code);
-       echo '<script language="javascript">';
-        echo 'alert("Your appointment has been successfully rescheduled, Thank you.")';
-        echo '</script>';
-        
-             
-
-
+       email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code);   
+      
+      echo '<script language="javascript">';
+      echo 'alert("Your appointment has been successfully rescheduled, Thank you.")';
+      echo '</script>';
         
     }
-     else {
+   
+    else {
        
-             echo '<script language="javascript">';
+        echo '<script language="javascript">';
         echo 'alert("Unable to reschedule your appointment, Please try again. ")';
         echo '</script>';
-         header("refresh:0; url= ScheduleAppt.php");
+        
+        header("refresh:0; url= ScheduleAppt.php");
        }
     }   
           
- }//end of changing Appoitment part 
+ }//end of changing Appointment part 
   
  //do the process for schedule Appointment 
  elseif ($purpose == "schedule"){
      
-      $sql = "SELECT * FROM `users` WHERE firstName = '$firstName' AND email = '$email'";
+     //make sure that no one signup twice
+    $sql = "SELECT * FROM `users` WHERE firstName = '$firstName' AND lastName= '$lastName' AND email = '$email'";
     
     $result = mysqli_query($mysql, $sql);
    
-     //make sure that no one singup twice
+     //if there is no match in the database it will insert the user data to the database 
      if ($result->num_rows == 0){
-        
-         
-         
+    //assign a special code to the user      
     $code =  code (); 
     $sql = "INSERT INTO users (firstName, lastName, email, phone, dateTime, blood, code)"
             . "VALUES('$firstName', '$lastName', '$email', '$phone',  '$dateTime', '$drawblood', '$code')"; 
 
-        if (mysqli_query($mysql, $sql)){
+     if (mysqli_query($mysql, $sql)){
        
-             
+      //send a confirmation email to the user     
      email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code);
        header("refresh:0; url=main.html");
-          echo '<script language="javascript">';
+        echo '<script language="javascript">';
         echo 'alert("Thank you, your appointment has been scheduled!")';
         echo '</script>';
        }
-}
+       else {
+           header("refresh:0; url=ScheduleAppt.php");
+          echo '<script language="javascript">';
+        echo 'alert("Appointment could not be added to the database!, Please try again.")';
+        echo '</script>';
+      
+         }
+}//end of matching data if statement
+  
   else {
         
          header("refresh:0; url=ScheduleAppt.php");
           echo '<script language="javascript">';
-        echo 'alert("This information has already been used, please try again.")';
+        echo 'alert("These credentials have already been used: \nPlease '
+          . 'check your email for a confirmation. \nIf you are attempting to reschedule go to View/Change appointment page. ")';
         echo '</script>';
       
      }
@@ -146,18 +150,13 @@ if ($result->num_rows > 0){
     }
 
     
-   
-   
-
-
-
-
-
+  
 function email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code){
-   $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    //send an email to the user when they Signup or Change Appointment
+   $mail = new PHPMailer(true);       // Passing `true` enables exceptions
 try {
     //Server settings
-    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+    $mail->SMTPDebug = 0;            // Enable verbose debug output
     $mail->isSMTP();    
    $mail->SMTPOptions = array(
     'ssl' => array(
@@ -166,43 +165,40 @@ try {
         'allow_self_signed' => true
     )
 );// Set mailer to use SMTP
-    $mail->Host = 'smtp.gmail.com';   // Specify main and backup SMTP servers
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'oilerwell@gmail.com';                 // SMTP username
-    $mail->Password = 'Oiler123';                           // SMTP password
-    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587;                                    // TCP port to connect to
+    $mail->Host = 'smtp.gmail.com';            // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                    // Enable SMTP authentication
+    $mail->Username = 'oilerwell@gmail.com';   // SMTP username
+    $mail->Password = 'Oiler123';              // SMTP password
+    $mail->SMTPSecure = 'tls';                 // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                         // TCP port to connect to
     $mail->SMTPSecure = false;
     //Recipients
-    $mail->setFrom('no_reply@oilerwell.com');
-    $mail->addAddress($email);     // Add a recipient
-   
-  //  $mail->addReplyTo('info@example.com', 'Information');
+    $mail->setFrom('no_reply@oilerwell.com', 'no_reply@oilerwell.com');
+    $mail->addReplyTo('no_reply@oilerwell.com', '');
+    $mail->addAddress($email);                 // Add a recipient
    
 
     //Attachments
     $mail->addAttachment('attachment/AHAemailannouncement.pdf',  'AHAemailannouncement.pdf') ;        // Add attachments
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail-> AddEmbeddedImage('images/OilerWellEmail.png', 'oilerWellLogo');
-    $mail->Subject = 'OilerWell Appointment';
+    $mail-> AddEmbeddedImage('images/OilerWellEmail.png', 'oilerWellLogo', 'OilerWellEmail.png');
+    $mail->Subject = 'OilerWell Appointment Confirmation';
     $mail->Body    = '<body> <img src=" cid:oilerWellLogo"  alt="OilerWell Logo" > '
             . '<table rules="all" style="border-color: #666;" cellpadding="10"> '
             . '<tr style="background: #eee;"><td><strong>Name:</strong> </td><td> '. $firstName . ' '. $lastName .' </td></tr> '
             . '<tr><td><strong>Email:</strong> </td><td> '. $email .' </td></tr> '
             . '<tr><td><strong>Phone:</strong> </td><td>' . $phone . '</td></tr>'
             . ' <tr><td><strong>Are you willing to have a PA student draw your blood?</strong> </td><td>' . $drawblood . '</td></tr> '
-            . '<tr><td><strong>Appointment Time:</strong> </td><td>' . date_format(date_create($dateTime), 'd/m/Y \a\t H:i \A\M') . '</td></tr>'
+            . '<tr><td><strong>Appointment Time:</strong> </td><td>' . date_format(date_create($dateTime), 'm/d/Y \a\t H:i \A\M') . '</td></tr>'
             . ' <tr><td><strong>Confirmation code:</strong> </td><td>' . $code . '</td></tr> '
             . '</table> '
             . '<P><b>*Note:</b> You need to use the confirmation code to View/Change the appointment.</p> '
             . '</body>';
     $mail->AltBody = 'OilerWell Appointment';
-    
-  
-
+   
     $mail->send();
-   // echo 'Message has been sent';
-} catch (Exception $e) {
+} 
+   catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 }  
     
@@ -211,7 +207,7 @@ try {
 
 function code (){
     $uniqueCode = TRUE; 
-    // Creat a random code and make sure that there's no duplicate code number
+    // Creates a random code and make sure that there's no duplicate code number
    while ($uniqueCode){
         
        $code= rand(10000,99999); 

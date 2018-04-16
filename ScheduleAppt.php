@@ -17,11 +17,11 @@ if (! $mysql){
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $_SESSION['firstName']= $_POST['firstName'];   
-    $_SESSION['lastName'] = $_POST['lastName'];
-    $_SESSION['email']= $_POST['email'];
-    $_SESSION['phone'] = $_POST['phone'];
-    $_SESSION['drawblood'] = $_POST['drawblood'];
+    $_SESSION['firstName']=  htmlspecialchars ($_POST['firstName']);   
+    $_SESSION['lastName'] =  htmlspecialchars ($_POST['lastName']);
+    $_SESSION['email']=  htmlspecialchars ($_POST['email']);
+    $_SESSION['phone'] =  htmlspecialchars ($_POST['phone']);
+    $_SESSION['drawblood'] =  htmlspecialchars ($_POST['drawblood']);
     $_SESSION['purpose'] = "schedule"; 
     header("location: DateAndTime.php");    
 }
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <h1><a href="main.html"><img src="images/OilerWell_Logo_resized.png" width="859" height="267" alt=" OilerWell Main logo"></a></h1>
 
         </header>
-
+         <!-- navigation bar --> 
         <nav class="sitenavigation">
 
 
@@ -105,9 +105,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <input type="email" name="email" id="emailinput"
                                    placeholder="Email" required>
                         </label>
+                      </fieldset>
+                    <fieldset class ="phoneInput">
                         <label for="phoneinput">
                             <p class= "labelP">Phone:</p>
-                            <input type="tel" name="phone" id="phoneinput" placeholder="Phone Number"   minlength="10" maxlength="12" >
+                            <input type="tel" name="phone" id="phoneinput" placeholder="Phone Number"   minlength="10" maxlength="16" >
                         </label>
                     </fieldset>
 
@@ -126,10 +128,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <fieldset class="nextButton">
                         <input type="submit" id="nextButton" value="Next"  style="float: right;">
                     </fieldset>
-
+  
                 </form>
             </div> 
+            <script> 
+                
+                document.getElementById('phoneinput').addEventListener('keyup',function(evt){
+        var phoneNumber = document.getElementById('phoneinput');
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        phoneNumber.value = phoneFormat(phoneNumber.value);
+});
+                // A function to format text to look like a phone number
+function phoneFormat(input){
+        // Strip all characters from the input except digits
+        input = input.replace(/\D/g,'');
 
+        // Trim the remaining input to ten characters, to preserve phone number format
+        input = input.substring(0,10);
+
+        // Based upon the length of the string, we add formatting as necessary
+        var size = input.length;
+        if(size == 0){
+                input = input;
+        }else if(size < 4){
+                input = '('+input;
+        }else if(size < 7){
+                input = '('+input.substring(0,3)+') '+input.substring(3,6);
+        }else{
+                input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+        }
+        return input; 
+}
+                </script> 
         </article>
         <footer>
             <p class="footerP"> 120 West Foulke Ave, Findlay, OH 45840 | (419) 434-4550 | cosiano@findlay.edu</p>

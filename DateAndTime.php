@@ -184,27 +184,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         ?>
 
 		      
-                      
-					
-
-		
-	
-		  <fieldset class="nextButton">
+    		  <fieldset class="nextButton">
                     
                       <input type="submit" id="nextButton" value="Next"    style="float: right;">
                       
                    </fieldset>
 		 </form>
-                   
+                 <form>
                    <button id="backButton" style="float: left; margin-top:-9%;" onclick="goBack()" >Back</button>
              
                        
-                      
-
-
-
-
-                 </form>
+                  </form>
                    <script> 
                              
   function goBack() {
@@ -214,19 +204,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 function disableButtons(selectedDay){
 
-undisalbeButtons();
-var dublicetArray = []; 
+undisableButtons();
+var duplicateArray = []; 
 var temp; 
 var tempTime; 
 var time; 
 var date; 
 
 
-dublicetArray= JSON.parse('<?php duplicate();?>');
+duplicateArray= JSON.parse('<?php duplicate();?>');
 
-for (i = 0; i < dublicetArray.length; i++){
+for (i = 0; i < duplicateArray.length; i++){
    
-temp=dublicetArray[i];
+temp= duplicateArray[i];
   
   date = temp.substring(5, 10);
   tempTime = temp.substring(11, 16);
@@ -253,7 +243,7 @@ temp=dublicetArray[i];
 
 }
 
-function undisalbeButtons(){
+function undisableButtons(){
         var tempTime='06:30' ;
         var time; 
          for (i=0; i<25; i++){

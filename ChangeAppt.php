@@ -32,13 +32,13 @@ $phone = "none";
 $dateTime="dateTime";
 $blood = "bloodAns";
 
-
+//get the email and code number to view the appointment
 if (count($_GET)>0)
 {
     
-$emailPost = trim($_GET['email']);
+$emailPost =  htmlspecialchars (trim($_GET['email']));
 
-$codePost = $_GET['code'];
+$codePost =  htmlspecialchars ($_GET['code']);
 
 
 $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'";
@@ -68,7 +68,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
  else {
      
      echo '<script language="javascript">';
-        echo 'alert("No results match your input. Plese make sure you input the right Email and Code")';
+        echo 'alert("No results match your input. Please make sure you input the right Email and Code")';
         echo '</script>';
              
  }

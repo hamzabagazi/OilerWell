@@ -102,7 +102,7 @@ session_start();
                        <p>Appointment Time:</p>
                      </div>	
                        <div class="table-cell">
-                        <!-- <p class="summary-date" class="summary-time"></p> --> 
+                       
                           <p > <?php  echo date_format(date_create($_SESSION['dateTime']), 'g:ia \o\n l F jS Y'); ?>   </p>  
                        </div>
                    </div>
@@ -110,7 +110,7 @@ session_start();
 				   
 			 
 		    </div>
-                      
+                       <!-- pass all the user info from session variables to submit page as hidden inputs --> 
 			  <input type="hidden" name="firstName" value=" <?php echo $_SESSION['firstName'];?>" >
 		
                        <input type="hidden" name="lastName" value=" <?php echo $_SESSION['lastName'];?>">
@@ -118,7 +118,6 @@ session_start();
                        <input type="hidden" name="email" value=" <?php echo $_SESSION['email'];?>">
 				
                        <input type="hidden" name="phone" value=" <?php echo $_SESSION['phone'];?>">
-			
                        <input type="hidden" name="drawblood" value=" <?php echo $_SESSION['drawblood'];?>">
                        <input type="hidden" name="dateTime" value=" <?php echo $_SESSION['dateTime'];?>">
                         <input type="hidden" name="purpose" value=" <?php echo $_SESSION['purpose'];?>">
@@ -130,9 +129,11 @@ session_start();
                   </form>
                       <button id="backButton" style="float: left; margin-top:-79px;" onclick="goBack()" >Back</button>
 		 <script> 
-                             
+              //function will return the url for the previous page                
             function goBack() {
-              window.history.back();
+              
+                   window.history.back();
+                   
                 } 
                 </script> 
 

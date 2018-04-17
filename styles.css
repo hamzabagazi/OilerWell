@@ -433,10 +433,12 @@ fieldset {
 
 @media screen and (max-width: 505px) {
 	.requiredInfoChange label, 
-	.requiredInfoSignUp label {
+	.requiredInfoSignUp label,
+	.phoneInput label{
 		padding-left: 0;
 		margin-left: 0;
-
+	}
+}
  
 
 .map{

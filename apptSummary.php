@@ -12,6 +12,7 @@ session_start();
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
       <script src="modernizr.custom.40753.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
 	   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="styles.css">
@@ -123,19 +124,29 @@ session_start();
                         <input type="hidden" name="purpose" value=" <?php echo $_SESSION['purpose'];?>">
                       
                        
-			  <fieldset class="nextButton">
+			  
                               <input type="submit" name="submit" id="nextButton" value="Submit"  style="float: right;">
-                   </fieldset>
-                  </form>
-                      <button id="backButton" style="float: left; margin-top:-79px;" onclick="goBack()" >Back</button>
-		 <script> 
-              //function will return the url for the previous page                
-            function goBack() {
-              
-                   window.history.back();
                    
-                } 
-                </script> 
+                  </form>
+                      <button id="backButton" style="float: left;" onclick="goBack()" >Back</button>
+                      
+  <script> 
+    
+    
+    $(document).ready(function(){
+    var nextButtonPos = $("#nextButton").position();
+    
+   document.getElementById('backButton').style.position = "absolute";
+   document.getElementById("backButton").style.top = nextButtonPos.top + "px";
+ });       
+   
+    //function will return the url for the previous page                
+     function goBack() {
+             
+       window.history.back();
+                   
+       } 
+       </script> 
 
 		</div> 
    

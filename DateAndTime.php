@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
      
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width">
- 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
 	   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="styles.css">
@@ -131,72 +131,81 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
    
 
   <article>
-        <div class="container">
+     <div class="container">
 		
-		 <h2> Date And Time </h2>  
-		  
+         <h2> Date And Time </h2>  
+		 
 		
-                 <form class="dateForm cf" action= "DateAndTime.php" method="post" > 
-			 <p class="generalP"> Please Select Date:  </p> 
-			 <section class="plan cf">
+ <form class="dateForm cf" action= "DateAndTime.php" method="post" > 
+     <p class="generalP"> Please Select Date:  </p> 
+	
+     <section class="plan cf">
 				
-                             <input type="radio" name="selectedDate" id="free" value="2018-11-05"  onclick= "disableButtons('11-05')"><label class="free-label four col" for="free">Mon 11/5</label>
-				<input type="radio" name="selectedDate" id="basic" value="2018-11-06" onclick= "disableButtons('11-06')"><label class="label four col" for="basic">Tue 11/6</label>
-				<input type="radio" name="selectedDate" id="premium" value="2018-11-07" onclick= "disableButtons('11-07')"><label class="label four col" for="premium">Wed 11/7</label>
-				<input type="radio" name="selectedDate" id="b" value="2018-11-08" onclick= "disableButtons('11-08')"><label class="label four col" for="b">Thu 11/8</label>
-				<input type="radio" name="selectedDate" id="p" value="2018-11-09" onclick= "disableButtons('11-09')"><label class="label four col" for="p">Fri 11/9</label>
-			</section>
-  
-             
-			
-			<p class="generalP"> Please Select Time:  </p>
-			
-                        <?php 
-                         $counter = 1;
-                                $hour = 6;
-                                $minute = 30;
-                          for ($j =0; $j<5; $j++){
-                              
-                             
-			echo '<section class="plan cf">';
-                            
-				
-                                for ($i=0; $i<5; $i++){
-                                    
-                                    
-                              
-                                   echo '<input type="radio" name="selectedTime" id="'.$hour.':'.$minute.'" value=' . $hour. ':'.$minute.'><label class="label four col" for="'.$hour.':'.$minute.'"  id="'.$hour.':'.$minute.'L" >' . $hour . ':'.$minute.' AM</label>';
-                                  
-                                  $counter++;
-                                
-                                    $minute += 10;
-                                    if( $minute >= 60){
-                                        $minute -= 60;
-                                        $hour++;
-                                        if ($minute == 0){
-                                            $minute= $minute."0";
-                                        }
-                                    }
-                                }
-                             
-			echo'</section>';
-                        }
-                        ?>
+        <input type="radio" name="selectedDate" id="free" value="2018-11-05"  onclick= "disableButtons('11-05')"><label class="free-label four col" for="free">Mon 11/5</label>
+	<input type="radio" name="selectedDate" id="basic" value="2018-11-06" onclick= "disableButtons('11-06')"><label class="label four col" for="basic">Tue 11/6</label>
+	<input type="radio" name="selectedDate" id="premium" value="2018-11-07" onclick= "disableButtons('11-07')"><label class="label four col" for="premium">Wed 11/7</label>
+	<input type="radio" name="selectedDate" id="b" value="2018-11-08" onclick= "disableButtons('11-08')"><label class="label four col" for="b">Thu 11/8</label>
+	<input type="radio" name="selectedDate" id="p" value="2018-11-09" onclick= "disableButtons('11-09')"><label class="label four col" for="p">Fri 11/9</label>
 
-		      
-    		  <fieldset class="nextButton">
-                    
-                      <input type="submit" id="nextButton" value="Next"    style="float: right;">
-                      
-                   </fieldset>
-		 </form>
-                 <form>
-                   <button id="backButton" style="float: left; margin-top:-9%;" onclick="goBack()" >Back</button>
+     </section>
+  
+     <p class="generalP"> Please Select Time:  </p>
+			
+      
+         <?php 
              
-                       
-                  </form>
-                   <script> 
+         $counter = 1;
+         $hour = 6;
+         $minute = 30;
+         
+         for ($j =0; $j<5; $j++)
+         {
+                              
+           echo '<section class="plan cf">';
+                  
+           for ($i=0; $i<5; $i++)
+           {
+           
+              echo '<input type="radio" name="selectedTime" id="'.$hour.':'.$minute.'" value=' . $hour. ':'.$minute.'><label class="label four col" for="'.$hour.':'.$minute.'"  id="'.$hour.':'.$minute.'L" >' . $hour . ':'.$minute.' AM</label>';
+                                  
+              $counter++;
+              $minute += 10;
+             
+              if( $minute >= 60)
+                  {
+                   $minute -= 60;
+                   $hour++;
+                if ($minute == 0)
+                    {
+                      $minute= $minute."0";
+                      }
+                   
+                      
+                    }
+                    
+              }
                              
+   	       echo'</section>';
+             }
+        ?>
+     
+   <input type="submit" id="nextButton" value="Next"    style="float: right;">
+                      
+
+ </form>
+          
+    <button id="backButton" style="float: left;" onclick="goBack()" >Back</button>
+         
+<script> 
+                            
+ $(document).ready(function(){
+     
+   var nextButtonPos = $("#nextButton").position();
+   document.getElementById('backButton').style.position = "absolute";
+   document.getElementById("backButton").style.top = nextButtonPos.top + "px";
+ });              
+  
+  //function will return the url for the previous page  
   function goBack() {
     window.history.back();
 }

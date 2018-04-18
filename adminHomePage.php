@@ -96,6 +96,9 @@ else {
                          <form action="appointmentTable.php" style="padding: 0;">				
                               <input type="submit" id="adminApptTableBtn" value="Database" name="database" >
                           </form>
+                          <form action="reminderEmail.php" style="padding: 0;">				
+                              <input type="submit" id="adminApptTableBtn" value="Send Reminder" name="reminder" >
+                          </form>
                             
 			</fieldset> 
 				 <form  action="logout.php" method="post">

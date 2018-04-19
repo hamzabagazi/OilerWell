@@ -1,7 +1,5 @@
 <?php 
 session_start();
-
-
    
 ?>
 <!DOCTYPE html>
@@ -125,14 +123,14 @@ session_start();
                       
                        
 			  
-                              <input type="submit" name="submit" id="nextButton" value="Submit"  style="float: right;">
+                   <input type="submit" name="submit" id="nextButton" value="Submit"  style="float: right;">
                    
                   </form>
                       <button id="backButton" style="float: left;" onclick="goBack()" >Back</button>
                       
   <script> 
     
-    
+    //lineup the back button on the postion of next button     
     $(document).ready(function(){
     var nextButtonPos = $("#nextButton").position();
     

@@ -26,7 +26,8 @@ if (! $mysql){
 if (!mysqli_select_db($mysql, $dbase)){
     echo 'Database Not Selected';
 }
-   
+
+//convert the dateTime sql type to php type   
 function convert ($tableDateTime){
         
         $dateTime=  date_create($tableDateTime);
@@ -117,7 +118,7 @@ function convert ($tableDateTime){
              </thead>
              <tbody>
  <?php
-
+//print users records in table
    $row_counter = 1; 
   
   $sql = "SELECT  firstName, lastName, email, phone, dateTime, blood, code FROM users ORDER BY dateTime  ASC";
@@ -145,9 +146,7 @@ $mysql->close();
 ?>
              </tbody>
 </table>
-	<!--<form action="excel.php" method="post" class ="centerButton"> 
-            <input type="submit" id="nextButton" name="export_excel" class="btn btn-succes" value="Export to Excel"  />  
-      </form> 	 -->
+	
   </div> 
       <script src="gisttech/js/bootstrap.min_1.js" type="text/javascript"></script>
       <script src="gisttech/js/FileSaver.min.js" type="text/javascript"></script>

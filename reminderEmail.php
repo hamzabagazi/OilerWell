@@ -1,4 +1,9 @@
 <?php 
+ //Connection + database
+$user = "root"; 
+$password = ""; 
+$host = "localhost"; 
+$dbase = "oilerwellappointment"; 
 
 // Create connection   
 $mysql = new mysqli($host, $user, $password);
@@ -22,18 +27,48 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 
- //make sure that no one signup twice
-    $sql = "SELECT * FROM `users` WHERE firstName = '$firstName' AND lastName= '$lastName' AND email = '$email'";
+ //count number of records in database
+ $sql = "SELECT * FROM `users`";
     
-    $result = mysqli_query($mysql, $sql);
+ $result = mysqli_query($mysql, $sql);
    
-     //if there is no match in the database it will insert the user data to the database 
-     if ($result->num_rows == 0){
-         
+ $totalRecords = $result->num_rows; 
+    //make sure there's records in database
+    if ($totalRecords > 0){
+         while($record = $result->fetch_assoc()) {
+          
+           $firstName= $record["firstName"];
+           $lastName=$record["lastName"]; 
+           $email= $record["email"]; 
+           $phone = $record["phone"];
+           $dateTime= $record["dateTime"];
+           $drawblood= $record["blood"];
+           $code= $record["code"];
+             
+    email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code);
+           
+       
+         }
+          
+         header("refresh:0; url=adminHomePage.php");
+        echo '<script language="javascript">';
+        echo 'alert("All the reminder emails has been sent")';
+        echo '</script>'; 
      }
      
-     function email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code){
-    //send an email to the user when they Signup or Change Appointment
+     else {
+         header("refresh:0; url=adminHomePage.php");
+        echo '<script language="javascript">';
+        echo 'alert("There is no records in database to send reminder email with")';
+        echo '</script>'; 
+     }
+     
+
+     
+     
+     
+ function email ($firstName, $lastName, $email, $phone, $dateTime, $drawblood, $code){
+    //send an email to the user 
    $mail = new PHPMailer(true);       // Passing `true` enables exceptions
 try {
     //Server settings
@@ -63,7 +98,7 @@ try {
     $mail->addAttachment('attachment/AHAemailannouncement.pdf',  'AHAemailannouncement.pdf') ;        // Add attachments
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail-> AddEmbeddedImage('images/OilerWellEmail.png', 'oilerWellLogo', 'OilerWellEmail.png');
-    $mail->Subject = 'OilerWell Appointment Confirmation';
+    $mail->Subject = 'OilerWell Appointment Reminder';
     $mail->Body    = '<body> <img src=" cid:oilerWellLogo"  alt="OilerWell Logo" > '
             . '<table rules="all" style="border-color: #666;" cellpadding="10"> '
             . '<tr style="background: #eee;"><td><strong>Name:</strong> </td><td> '. $firstName . ' '. $lastName .' </td></tr> '
@@ -78,10 +113,18 @@ try {
     $mail->AltBody = 'OilerWell Appointment';
    
     $mail->send();
-} 
+    } 
    catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-}  
+        }  
     
 }
+
+//convert the dateTime sql type to php type 
+function convert ($tableDateTime){
+        
+        $dateTime=  date_create($tableDateTime);
+        
+        return $dateTime;
+    }
 ?>

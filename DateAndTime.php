@@ -40,11 +40,11 @@ function duplicate(){
 
     }
 }
-
+// if form submitted with post method
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
+    //make sure that the user select a date 
         if (isset($_POST['selectedDate'])){
-             
+         //make sure the user select a time     
             if (isset($_POST['selectedTime'])){
                 
                  $selectedDate = $_POST['selectedDate'];
@@ -100,32 +100,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
    <nav class="sitenavigation">
    
    
+     <div class="wrapper">
+        <span class="square">
+            <a class="tenth before after" href="main.html"> Home</a>
+        </span>
+     </div>
+       <div class="wrapper">
+	<span class="square">
+	  <a class="tenth before after" href="guidelines.html"> Guidelines </a>
+	</span>
+       </div>
        
-			<div class="wrapper">
-               <span class="square">
-               <a class="tenth before after" href="main.html"> Home</a>
-              </span>
-              </div>
-			  <div class="wrapper">
-				<span class="square">
-				     <a class="tenth before after" href="guidelines.html"> Guidelines </a>
-				</span>
-			  </div>
-                <div class="wrapper">
-				<span class="square">
-			      <a class="tenth before after" href="ScheduleAppt.php"> Schedule Appointment </a>
-				</span>
-			  </div>
-               <div class="wrapper">
-				<span class="square">
-			       <a class="tenth before after" href="changeAppt.php"> View/Change Appointment </a>
-				</span>
-			  </div>
-               <div class="wrapper">
-				<span class="square">
-			       <a class="tenth before after" href="location.html"> Location </a> 
-				</span>
-			  </div>
+       <div class="wrapper">
+	<span class="square">
+	   <a class="tenth before after" href="ScheduleAppt.php"> Schedule Appointment </a>
+	</span>
+       </div>
+       <div class="wrapper">
+	<span class="square">
+	 <a class="tenth before after" href="changeAppt.php"> View/Change Appointment </a>
+	</span>
+       </div>
+       <div class="wrapper">
+	<span class="square">
+	 <a class="tenth before after" href="location.html"> Location </a> 
+	</span>
+       </div>
         
    </nav>
    
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <article>
      <div class="container">
 		
-         <h2> Date And Time </h2>  
+      <h2> Date And Time </h2>  
 		 
 		
  <form class="dateForm cf" action= "DateAndTime.php" method="post" > 
@@ -152,13 +152,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
      <p class="generalP"> Please Select Time:  </p>
 			
       
-         <?php 
-             
-         $counter = 1;
-         $hour = 6;
-         $minute = 30;
+    <?php 
+       //make dynamic times buttons on the fly       
+     $counter = 1;
+     $hour = 6;
+     $minute = 30;
          
-         for ($j =0; $j<5; $j++)
+     for ($j =0; $j<5; $j++)
          {
                               
            echo '<section class="plan cf">';
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                                   
               $counter++;
               $minute += 10;
-             
+             //reset the minute to zero
               if( $minute >= 60)
                   {
                    $minute -= 60;
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <button id="backButton" style="float: left;" onclick="goBack()" >Back</button>
          
 <script> 
-                            
+  //lineup the back button on the postion of next button                            
  $(document).ready(function(){
      
    var nextButtonPos = $("#nextButton").position();
@@ -210,18 +210,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     window.history.back();
 }
 
-
+//disable all the buttons that all the slots on were taken
 function disableButtons(selectedDay){
 
-undisableButtons();
-var duplicateArray = []; 
+
+undisableButtons(); //clear all the disabled buttons and the chosen one 
+var duplicateArray = []; //array will hold the times that the slots in it been taken
 var temp; 
 var tempTime; 
 var time; 
 var date; 
 
 
-duplicateArray= JSON.parse('<?php duplicate();?>');
+duplicateArray= JSON.parse('<?php duplicate();?>'); //copy the taken times from php array
 
 for (i = 0; i < duplicateArray.length; i++){
    
@@ -229,9 +230,8 @@ temp= duplicateArray[i];
   
   date = temp.substring(5, 10);
   tempTime = temp.substring(11, 16);
-  
+  //only disable the appoitment times on the selected date
   if (selectedDay === date){
-     
      
      var removeZero = tempTime.substring(0, 1);
      if (removeZero === '0'){
@@ -241,17 +241,17 @@ temp= duplicateArray[i];
          else {
              time = tempTime; 
          }
-    
+       //disabled the button and change the color and strike the text
        document.getElementById(time).disabled =true ; 
         var label = document.getElementById(time+"L");
         label.style.color = "red"; 
-           label.style.setProperty ("text-decoration", "line-through");
+        label.style.setProperty ("text-decoration", "line-through");
 }
 
   }
 
 }
-
+//clear the dates and times buttons 
 function undisableButtons(){
         var tempTime='06:30' ;
         var time; 
@@ -275,7 +275,7 @@ function undisableButtons(){
        }
     
 }
-
+//function will increment the minute every 10 mins
  function addMinutes(time, minsToAdd) {
   function D(J){ return (J<10? '0':'') + J;};
   var piece = time.split(':');

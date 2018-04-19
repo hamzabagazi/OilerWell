@@ -9,6 +9,31 @@ if (!$_SESSION["login_user"])
 else {
     $welcome= "<h3 style='color: black;'> Welcome : " .$_SESSION['login_user']."</h3>";
 }
+//Connection + database
+$user = "root"; 
+$password = ""; 
+$host = "localhost"; 
+$dbase = "oilerwellappointment"; 
+
+// Create connection   
+$mysql = new mysqli($host, $user, $password);
+
+// Check connection
+if (! $mysql){
+      
+    die ('Cloud not connect:' . mysqli_error());
+    
+}
+
+if (!mysqli_select_db($mysql, $dbase)){
+    echo 'Database Not Selected';
+} 
+//count number of records in database
+ $sql = "SELECT * FROM `users`";
+    
+ $result = mysqli_query($mysql, $sql);
+   
+ $totalRecords = $result->num_rows; 
 
 ?> 
 
@@ -96,10 +121,9 @@ else {
                          <form action="appointmentTable.php" style="padding: 0;">				
                               <input type="submit" id="adminApptTableBtn" value="Database" name="database" >
                           </form>
-                          <form action="reminderEmail.php" style="padding: 0;">				
-                              <input type="submit" id="adminApptTableBtn" value="Send Reminder" name="reminder" >
-                          </form>
-                            
+                       			
+                        <input type="submit" id="adminApptTableBtn" value="Send Reminder" name="reminder"  onclick="reminderConfirm()">
+                        
 			</fieldset> 
 				 <form  action="logout.php" method="post">
                                      
@@ -108,6 +132,21 @@ else {
                                    <input type="submit" id="nextButton" value="Logout" style="float: right;" >
                             </fieldset>
 			  </form>
+                  
+    <script>
+        //ensure that they want to send a reminder emaill to all the users 
+        function reminderConfirm(){
+     if (confirm('Are you sure you want to send a reminder email to <?php echo $totalRecords ?> users?')) {
+  
+                window.location.href= 'reminderEmail.php';  
+            } 
+            
+        else {
+                  // Do nothing!
+                }
+            }
+        </script>
+                      
 	
   </div> 
      

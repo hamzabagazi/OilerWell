@@ -207,7 +207,7 @@ try {
 
 function code (){
     $uniqueCode = TRUE; 
-    // Creates a random code and make sure that there's no duplicate code number
+    // Create a random code and make sure that there's no duplicate code number
    while ($uniqueCode){
         
        $code= rand(10000,99999); 

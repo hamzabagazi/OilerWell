@@ -25,7 +25,8 @@ if (! $mysql){
 if (!mysqli_select_db($mysql, $dbase)){
     echo 'Database Not Selected';
 }
-   
+
+//convert the dateTime sql type to php type   
 function convert ($tableDateTime){
         
         $dateTime=  date_create($tableDateTime);
@@ -113,7 +114,7 @@ function convert ($tableDateTime){
              </thead>
              <tbody>
  <?php
-
+//print users records in table
    $row_counter = 1; 
   
   $sql = "SELECT  firstName, lastName, dateTime, blood FROM users WHERE dateTime LIKE '%11-08%' ORDER BY dateTime  ASC";

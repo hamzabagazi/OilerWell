@@ -1,5 +1,5 @@
 <?php 
-//loguot from the admin page 
+//logout from the admin page 
 session_start(); 
 session_destroy(); 
 

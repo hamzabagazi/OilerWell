@@ -44,7 +44,7 @@ $codePost =  htmlspecialchars ($_GET['code']);
 $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'";
 
  $result = mysqli_query($mysql, $sql);
-
+//make sure there is matching result in the database
  if ($result->num_rows > 0) {
      while($row = $result->fetch_assoc()) {
   
@@ -68,7 +68,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
  else {
      
      echo '<script language="javascript">';
-        echo 'alert("No results match your input. Please make sure you input the right Email and Code")';
+        echo 'alert("No results match your input. please make sure you input the right Email and Code")';
         echo '</script>';
              
  }
@@ -81,7 +81,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 
  
 }
-
+// if the user request a change appointment request
  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
        global $firstName; 
     global $lastName; 
@@ -221,21 +221,22 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 				  
  
 	</div>
-                    <input type="hidden" name="firstName" value=" <?php echo $firstName;?>" >
+     <!-- pass all the user info from variables to session variables -->          
+           <input type="hidden" name="firstName" value=" <?php echo $firstName;?>" >
 		
-                       <input type="hidden" name="lastName" value=" <?php echo $lastName;?>">
+           <input type="hidden" name="lastName" value=" <?php echo $lastName;?>">
 				
-                       <input type="hidden" name="email" value=" <?php echo $email;?>">
+           <input type="hidden" name="email" value=" <?php echo $email;?>">
 				
-                       <input type="hidden" name="phone" value=" <?php echo $phone;?>">
-			
-                       <input type="hidden" name="drawblood" value=" <?php echo $blood;?>">
-                       <input type="hidden" name="dateTime" value=" <?php echo $dateTime;?>">
-
+            <input type="hidden" name="phone" value=" <?php echo $phone;?>">
+		
+            <input type="hidden" name="drawblood" value=" <?php echo $blood;?>">
+            
+            <input type="hidden" name="dateTime" value=" <?php echo $dateTime;?>">
 		  
 				
-				 <fieldset class="nextButton">
-                                     <input type="submit" id="nextButton" value="Change" style="float: right; <?php echo  $status; ?>" >
+                <fieldset class="nextButton">
+               <input type="submit" id="nextButton" value="Change" style="float: right; <?php echo  $status; ?>" >
                    </fieldset>
 		  </form>
 		</div> 

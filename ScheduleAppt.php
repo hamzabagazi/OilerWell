@@ -15,7 +15,7 @@ if (! $mysql){
     die ('Cloud not connect:' . mysqli_error());
     
 }
-
+// if form submitted with post method
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $_SESSION['firstName']=  htmlspecialchars ($_POST['firstName']);   
     $_SESSION['lastName'] =  htmlspecialchars ($_POST['lastName']);
@@ -50,23 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         </header>
          <!-- navigation bar --> 
-        <nav class="sitenavigation">
+     <nav class="sitenavigation">
 
 
 
-            <div class="wrapper">
-                <span class="square">
-                    <a class="tenth before after" href="main.html"> Home</a>
-                </span>
-            </div>
-            <div class="wrapper">
-                <span class="square">
-                    <a class="tenth before after" href="guidelines.html"> Guidelines </a>
-                </span>
-            </div>
-            <div class="wrapper">
-                <span class="square">
-                    <a class="tenth before after" href="ScheduleAppt.php"> Schedule Appointment </a>
+        <div class="wrapper">
+            <span class="square">
+                 <a class="tenth before after" href="main.html"> Home</a>
+            </span>
+        </div>
+         <div class="wrapper">
+            <span class="square">
+                <a class="tenth before after" href="guidelines.html"> Guidelines </a>
+            </span>
+         </div>
+          <div class="wrapper">
+             <span class="square">
+                <a class="tenth before after" href="ScheduleAppt.php"> Schedule Appointment </a>
                 </span>
             </div>
             <div class="wrapper">
@@ -83,21 +83,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </nav>
 
 
-        <article>
+    <article>
 
-            <div class="container">
-                <h2> Schedule An Appointment </h2>
-                <form class ="formGeneral" action="ScheduleAppt.php" method="post" >
+         <div class="container">
+           <h2> Schedule An Appointment </h2>
+           
+           <form class ="formGeneral" action="ScheduleAppt.php" method="post" >
 
-                    <fieldset class ="requiredInfoSignUp">
-                        <label for="nameinput">
-                            <p class= "labelP">Name: </p>
-                            <input type="text" name="firstName" id="firstinput"
-                                   placeholder="First" pattern="^[a-zA-Z-''-'\s]{1,50}$"
+               <fieldset class ="requiredInfoSignUp">
+                   <label for="nameinput">
+                      <p class= "labelP">Name: </p>
+              
+                      <input type="text" name="firstName" id="firstinput"
+                               placeholder="First" pattern="^[a-zA-Z-''-'\s]{1,50}$"
                                    required >
-                            <input type="text" name="lastName" id="lastinput"
-                                   placeholder="Last" pattern="^[a-zA-Z-''-'\s]{1,50}$"
-                                   required >
+                       <input type="text" name="lastName" id="lastinput"
+                                placeholder="Last" pattern="^[a-zA-Z-''-'\s]{1,50}$"
+                                required >
                         </label>
 
                         <label for="emailinput">
@@ -129,28 +131,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <input type="submit" id="nextButton" value="Next"  style="float: right;">
                     </fieldset>
   
-                </form>
-            </div> 
-            <script> 
+          </form>
+        </div> 
+    <script> 
                 
-                document.getElementById('phoneinput').addEventListener('keyup',function(evt){
-        var phoneNumber = document.getElementById('phoneinput');
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        phoneNumber.value = phoneFormat(phoneNumber.value);
+    document.getElementById('phoneinput').addEventListener('keyup',function(evt){
+        
+       var phoneNumber = document.getElementById('phoneinput');
+       var charCode = (evt.which) ? evt.which : evt.keyCode;
+       phoneNumber.value = phoneFormat(phoneNumber.value);
+       
 });
-                // A function to format text to look like a phone number
+
+// A function to format text to look like a phone number
 function phoneFormat(input){
-        // Strip all characters from the input except digits
-        input = input.replace(/\D/g,'');
+   // Strip all characters from the input except digits
+     input = input.replace(/\D/g,'');
 
-        // Trim the remaining input to ten characters, to preserve phone number format
-        input = input.substring(0,10);
+   // Trim the remaining input to ten characters, to preserve phone number format
+     input = input.substring(0,10);
 
-        // Based upon the length of the string, we add formatting as necessary
-        var size = input.length;
-        if(size == 0){
-                input = input;
-        }else if(size < 4){
+   // Based upon the length of the string, we add formatting as necessary
+     var size = input.length;
+     if(size == 0){
+           input = input;
+       }
+       else if(size < 4){
                 input = '('+input;
         }else if(size < 7){
                 input = '('+input.substring(0,3)+') '+input.substring(3,6);
@@ -158,9 +164,10 @@ function phoneFormat(input){
                 input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
         }
         return input; 
-}
-                </script> 
-        </article>
+      }
+ </script> 
+    
+    </article>
         <footer>
             <p class="footerP"> 120 West Foulke Ave, Findlay, OH 45840 | (419) 434-4550 | cosiano@findlay.edu</p>
 

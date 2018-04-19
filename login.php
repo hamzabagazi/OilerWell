@@ -30,6 +30,7 @@ if (isset($_POST["login"])){
     $result = mysqli_query($mysql, $sql);
     $row= mysqli_num_rows($result); 
     
+    //if the username/password matching one of the authorized users
     if ($row == 1)
     {
         $_SESSION["login_user"]= $username;
@@ -40,9 +41,5 @@ if (isset($_POST["login"])){
     }
     
 }
-
-
-
-
 
 ?> 

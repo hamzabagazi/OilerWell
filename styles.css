@@ -407,12 +407,28 @@ fieldset {
    font-size: 1.3em;
    color: ivory;
    border-radius: 10px;
-   height: 50px; 
-   width: 150px;
    text-align:center;
 }
 
+@media screen and (min-width: 504px) {
+	#backButton{
+		height: 50px; 
+		width: 150px;
+	}
+	#nextButton{
+		height: 50px; 
+		width: 150px;
+	}
+}
 
+@media screen and (max-width: 505px) {
+	#backButton{
+		padding: 1% 5%;
+	}
+	#nextButton{
+		padding: 1.3% 6.5%;
+	}
+}
 
 
 #firstinput, #lastinput, #emailinput , #phoneinput , #codeInput{

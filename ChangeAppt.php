@@ -71,14 +71,8 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
         echo 'alert("No results match your input. please make sure you input the right Email and Code")';
         echo '</script>';
              
- }
+    }
  
-
- 
-     
-
-
-
  
 }
 // if the user request a change appointment request

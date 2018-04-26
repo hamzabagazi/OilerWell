@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
              }
         ?>
      
-   <button id="nextButton" style="float: right;"> Next</button>
+    <input type="submit" id="nextButton" value="Next"    style="float: right;">
                       
  </form>
     <button id="backButton" style="float: left;" onclick="goBack()" >Back</button>

@@ -33,14 +33,6 @@ img {
 }
 
 
-/* header section 
-header {
-   max-width: 400px;
-   margin: 0 auto;
-    width: auto;
-}
-*/
-
 h1 {
 	
    height: auto;
@@ -68,18 +60,18 @@ nav.sitenavigation {
 
 /* ===============*/ 
 
-/*text before visit and hover */
+/*text before visit and hover of navigation bar */
 .wrapper{
    display: inline-block;
 }
 a,a:visited,a:hover,a:active{
   -webkit-backface-visibility:hidden;
-          backface-visibility:hidden;
-	position:relative;
+  backface-visibility:hidden;
+  position:relative;
   transition:0.5s color ease;
-	text-decoration:none;
-	color:  #4d9900;
-	font-size:2.5em;
+  text-decoration:none;
+  color:  #4d9900;
+  font-size:2.5em;
 	
 }
 
@@ -100,7 +92,7 @@ a.before:before{
 a.after:after{
   bottom:-0.25em;
 }
-/* line color top&bottom */ 
+/* Border lines color top&bottom */ 
 
 a.before:before,a.after:after{
   height:5px;
@@ -200,19 +192,21 @@ a.before:hover:before,a.after:hover:after{
   width:100%;
 }
 
+/* ****************  End of site navigation bar ******************** */
+
 /* main content */
 article {
    margin: 0 auto;
    padding: 1.4em;
    background: #cccccc;
-   /*background: url("images/background_Book.jpg");*/
+   
 }
 
 
 article h2{
-	 height: auto;
+   height: auto;
    width: auto;
-	text-align: center;
+   text-align: center;
    font-family: Bitter, "Times New Roman", Times, serif;
    font-weight: 500;
    background-color: #cccccc; 
@@ -232,19 +226,7 @@ article h2{
    overflow: auto;
    border-radius: 5px
 } 
-/*
-.ScheduleContainer {
-	
-	width: 100%; 
-	margin: 0 auto;
-	background-color: white;
-    padding: 1em 3% 1em;
-	border-radius: 5px;
-	
-   max-width: 980px;
-   margin: 0 auto;
-	}
-	*/
+
 .labelP{
 	display: block;
 	margin-left:0.4em; 
@@ -305,9 +287,12 @@ article li{
 	margin-top: 1em; 
 }
 
+
 form {
 	padding: 20px 30px;
 }
+
+
 /* fieldset styles */
 fieldset {
 	margin: -0.2em 0 0.8em;
@@ -331,16 +316,12 @@ fieldset {
 
 .bloodQuestion label {
     display: block;
-	position: relative;
+    position: relative;
     margin: 0.5em 0;
-	font-size: 1.4em;
-	padding-left: 13.5%;
+    font-size: 1.4em;
+    padding-left: 13.5%;
  }
  
-
- 
-
-
 .bloodQuestionP{
 	font-size: 1.4em; 
 	margin-left: 10.5%; 
@@ -355,28 +336,22 @@ fieldset {
 	background-color:   #cccccc;
 	
 }
-/*
-.nextButton, .ScheduleNextButton{
-	border: 0;
-	text-align: right;
-	
-}*/
+
+/* Buttons styles */ 
+
 #goButton{
 
    border: none;
    border-bottom: 1px solid #666;
    border-right: 1px solid #777;
-  padding: 0.3em;
+   padding: 0.3em;
    margin: 0 0 0 0.8em;
    background-color:#4d9900;
    font-size: 0.9em;
-   
    color: ivory;
    border-radius: 10px;
-	
-	
-	
 }
+
 .centerButton{
 	text-align: center; 
 }
@@ -411,22 +386,19 @@ fieldset {
 }
 
 @media screen and (min-width: 504px) {
-	#backButton{
+	#backButton, #nextButton{
 		height: 50px; 
 		width: 150px;
 	}
-	#nextButton{
-		height: 50px; 
-		width: 150px;
-	}
+	
 }
 
 @media screen and (max-width: 505px) {
-	#backButton{
-		padding: 1% 5%;
-	}
-	#nextButton{
+	
+	#nextButton, #backButton{
 		padding: 1.3% 6.5%;
+                height: 40px; 
+		width: 100px;
 	}
 }
 
@@ -457,7 +429,7 @@ fieldset {
 	}
 }
  
-
+/*formatting the interactive map */
 .map{
     max-width: 100%;
 	margin: 0;
@@ -468,7 +440,7 @@ fieldset {
 }
 
 
-/* feedback preview section */
+/* summsry preview section */
 .summary-preview {
    max-width: 700px;
    padding: 10px;
@@ -503,7 +475,7 @@ fieldset {
 }
 }
 
-/* Schedule Buttons */ 
+/* Date and Time Buttons */ 
 .four { width: 15%; max-width: 15%;}
 
 
@@ -594,9 +566,19 @@ fieldset {
 		line-height: 125%;
 		font-size: 16px;
 	}
+        .four{
+            width: 18.7%; 
+            max-width: -webkit-fill-available;
+        }
+        .col:first-of-type{
+            margin-left: 0; 
+        }
+        .generlP{
+            margin-left: 0.5em; 
+        }
 }
 
-/* Schedule Buttons */ 
+/* End Date and Time Buttons */ 
 
 /* footer section */
 footer {
@@ -612,7 +594,7 @@ footer {
 	
 }
 
-/* User Table */ 
+/* Appointments Table formate */ 
 
  table {
    border-collapse: collapse;
@@ -625,7 +607,7 @@ footer {
   th {
    background-color: #588c7e;
    color: white;
-    /* text-align: center;*/
+    
     }
   tr:nth-child(even) {background-color: #f2f2f2};
 

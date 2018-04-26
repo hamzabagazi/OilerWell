@@ -232,6 +232,12 @@ article h2{
 	margin-left:0.4em; 
 }
 
+.form-instructions {
+   color: red;
+   text-align: center;
+   font-size: 1.3em;
+}
+
 .requiredInfoSignUp p:before, .bloodQuestion p:before{
 	content: "* ";
 	color: red;

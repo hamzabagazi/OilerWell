@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
          <div class="container">
            <h2> Schedule An Appointment </h2>
            
+             <p class="form-instructions">* indicates a required field</p>
            <form class ="formGeneral" action="ScheduleAppt.php" method="post" >
 
                <fieldset class ="requiredInfoSignUp">

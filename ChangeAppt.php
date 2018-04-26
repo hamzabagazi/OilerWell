@@ -165,7 +165,7 @@ $sql = "SELECT * FROM `users` WHERE email = '$emailPost' AND code = '$codePost'"
 					placeholder="Email" required >
 				</label>
 				<label for="confirmationCodeinput">
-					<p class= "labelP">Confirmation Code:</p>
+					<p class= "labelP">Confirmation Code: <small>(provided in confirmation email)</small></p>
 					<input type="tel" name="code" id="codeInput" placeholder="Code"   maxlength="5" required >
 					    <input type="submit" id="goButton" value="View">
 				</label>
